@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>Lidlar</title>{% endblock title %}
+{% block content %}
+<div class="col-12 col-sm-10 col-lg-11" style="max-height: 900px; overflow-y: auto;">
+  <style>
+    label{
+      display: none;
+    }
+  </style>
+  <div class="row drag-lists">
+    <div class="col-12 col-sm-6 col-xl-4 p-2">
+      <div class="d-flex align-items-end justify-content-between">
+        <h4>So'rovlar <span class="text-secondary">{{ count }}</span></h4>
+        <i class="bx bx-list-ul fs-4" data-bs-toggle="offcanvas" data-bs-target="#addGroupBox" aria-controls="offcanvasRight"></i>
+      </div>
+
+      <div class="dropdown my-2">
+        <button class="btn btn-primary w-100 p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bx bx-plus-circle fs-4"></i>
+        </button>
+        <form action="" method="POST" class="dropdown-menu w-100 p-0">
+          {% csrf_token %}
+          <!-- {{ form.name }}
+          {{ form.surname }}
+          {{ form.phone_number }}
+          <select class="form-select shadow-none border-0" style="cursor: pointer;">
+            <option value="" selected hidden>Qayerdan</option>
+            {% for i in lids %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+          </select>
+          {{ form.comment }} -->
+          {{ form }}
+          <button class="btn btn-primary w-100 rounded-top-0" type="submit">Saqlash</button>
+        </form>
+      </div>
+
+      <ul class="bg-success bg-opacity-25 drag-list list-unstyled px-2 py-1 rounded">
+        <h6 class="text-secondary py-1">Markazga</h6>
+        {% for i in to_center %}
+        <li class="drag-item p-2 bg-primary bg-opacity-50 my-2 rounded" draggable="true">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-medium">{{ i.name }} {{ i.surname }}</span>
+            <span>
+              <a class="text-black fs-5" href="#"><i class="bx bx-time"></i></a>
+              <a class="text-black fs-5" href="#"><i class="bx bx-dots-horizontal"></i></a>
+            </span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <a class="fs-6 text-black" href="tel:+998998999005">{{ i.phone_number}}</a>
+            <span class="fs-6">{{ i.added }}</span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <ul class="bg-success bg-opacity-25 drag-list list-unstyled px-2 py-1 rounded">
+        <h6 class="text-secondary py-1">Markazga kelganlar</h6>
+        {% for i in came_to_center %}
+        <li class="drag-item p-2 bg-primary bg-opacity-50 my-2 rounded" draggable="true">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-medium">{{ i.name }} {{ i.surname }}</span>
+            <span>
+              <a class="text-black fs-5" href="#"><i class="bx bx-time"></i></a>
+              <a class="text-black fs-5" href="#"><i class="bx bx-dots-horizontal"></i></a>
+            </span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <a class="fs-6 text-black" href="tel:+998998999005">{{ i.phone_number}}</a>
+            <span class="fs-6">{{ i.added }}</span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <ul class="bg-success bg-opacity-25 drag-list list-unstyled px-2 py-1 rounded">
+        <h6 class="text-secondary py-1">Telegram</h6>
+        {% for i in telegram %}
+        <li class="drag-item p-2 bg-primary bg-opacity-50 my-2 rounded" draggable="true">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-medium">{{ i.name }} {{ i.surname }}</span>
+            <span>
+              <a class="text-black fs-5" href="#"><i class="bx bx-time"></i></a>
+              <a class="text-black fs-5" href="#"><i class="bx bx-dots-horizontal"></i></a>
+            </span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <a class="fs-6 text-black" href="tel:+998998999005">{{ i.phone_number}}</a>
+            <span class="fs-6">{{ i.added }}</span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <ul class="bg-success bg-opacity-25 drag-list list-unstyled px-2 py-1 rounded">
+        <h6 class="text-secondary py-1">Friend</h6>
+        {% for i in friend %}
+        <li class="drag-item p-2 bg-primary bg-opacity-50 my-2 rounded" draggable="true">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-medium">{{ i.name }} {{ i.surname }}</span>
+            <span>
+              <a class="text-black fs-5" href="#"><i class="bx bx-time"></i></a>
+              <a class="text-black fs-5" href="#"><i class="bx bx-dots-horizontal"></i></a>
+            </span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <a class="fs-6 text-black" href="tel:+998998999005">{{ i.phone_number}}</a>
+            <span class="fs-6">{{ i.added }}</span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <ul class="bg-success bg-opacity-25 drag-list list-unstyled px-2 py-1 rounded">
+        <h6 class="text-secondary py-1">Walked by</h6>
+        {% for i in walked_by %}
+        <li class="drag-item p-2 bg-primary bg-opacity-50 my-2 rounded" draggable="true">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-medium">{{ i.name }} {{ i.surname }}</span>
+            <span>
+              <a class="text-black fs-5" href="#"><i class="bx bx-time"></i></a>
+              <a class="text-black fs-5" href="#"><i class="bx bx-dots-horizontal"></i></a>
+            </span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <a class="fs-6 text-black" href="tel:+998998999005">{{ i.phone_number}}</a>
+            <span class="fs-6">{{ i.added }}</span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-4 p-2">
+      <div class="d-flex align-items-end justify-content-between">
+        <h4>Kutish <span class="text-secondary">(13)</span></h4>
+        <i class="bx bx-list-ul fs-4" data-bs-toggle="offcanvas" data-bs-target="#addGroupBox" aria-controls="offcanvasRight"></i>
+      </div>
+      <ul class="bg-secondary bg-opacity-25 drag-list list-unstyled px-2 py-1 rounded">
+        <h6 class="text-secondary py-1">Walked by</h6>
+      </ul>
+    </div>
+
+    
+  </div>
+
+</div>
+    <!-- To'plam qo'shish modal -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="addGroupBox" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header border-bottom">
+        <h5 id="offcanvasRightLabel">Bo'lim yaratish</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form action="#">
+          <label class="w-100">
+            <span>Nomi</span>
+            <input class="form-control mt-3" type="text" name="" id="">
+          </label>
+          <button class="btn btn-success rounded-pill mt-3">Yarating</button>
+        </form>
+      </div>
+</div>
+{% endblock content %}
+    <!-- Scripts -->
+{% block scripts %}
+    <script src="./js/main.js"></script>
+{% endblock scripts %}

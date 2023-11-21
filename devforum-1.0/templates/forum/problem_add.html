@@ -1,0 +1,30 @@
+{% extends 'wrapper.html' %}
+{% block title %}
+<title>{{ request.user.username }}'s - Ask</title>
+{% endblock title %}
+{% block content %}
+{{form.media}}
+<style>
+    label{
+        margin-top: 10px;
+    }
+</style>
+    <div class="card p-4 mt-4">
+        <div>
+            <form  method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="btn btn-primary mt-4">
+            </form>
+        </div>
+    </div>
+    <script>
+        document.querySelector(".ql-editor").style.height = '200px'
+        let elems = document.forms[1].elements
+        for(let el of elems){
+          if(el.hasAttribute("id")){
+            el.classList.add("form-control")
+          }
+        }
+      </script>
+{% endblock content %}

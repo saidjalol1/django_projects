@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% load static %}
+{% block content %}
+<div class="col-12 col-sm-10 col-lg-11" style="max-height: 900px; overflow-y: auto;">
+            <!-- add new -->
+            <div class="d-sm-flex flex-sm-wrap align-items-center justify-content-between pt-3 pb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <h2 class="fs-3">O'qituvchilar</h2>
+                <p class="fs-6 mb-0 mx-4">Soni - <span>{{ teachers.count }}</span></p>
+              </div>
+              <a class="d-flex justify-content-sm-end justify-content-center my-2 my-sm-0" href="#">
+                <button class="p-2 px-4 text-white bg-success border-0 rounded-pill "  data-bs-toggle="offcanvas" data-bs-target="#addModal" aria-controls="offcanvasRight">Yangisnini qo'shish</button>
+              </a>
+            </div>
+
+            <!-- TEACHERS -->
+            <div class="row p-2 justify-content-evenly">
+                {% for i in teachers %}  
+                <div class="col-sm-12 col-md-5 my-1 px-2 py-2 fs-6 shadow rounded-3 d-flex flex-wrap align-items-center justify-content-between bg-white">
+                  <a class="text-black mx-1 my-2" href="{% url 'teachers:teacher_detail' i.id %}">{{ i.name }} {{ i.surname }}</a>
+                  <span class="text-secondary m-1 my-2">{{ i.phone_number }}</span>
+                  <span class="text-secondary m-1 my-2">{{ i.groups.count }}</span>
+                  <div class="btn-group dropend m-1 my-2" href="#">
+                    <a class="bx bx-dots-vertical-rounded text-success" data-bs-toggle="dropdown" aria-expanded="false" href=""></a>
+                    <ul class="dropdown-menu py-0">
+                      <li>
+                          <a href="{% url 'teachers:teachers_update' i.id %}"  class="tahrir rounded-2 dropdown-item text-secondary" data-bs-toggle="offcanvas" data-bs-target="#editModal" aria-controls="offcanvasRight" >
+                          <i class="bx bx-edit"></i>
+                          Tahrirlash
+                          </a>
+                      </li>
+                      <li>
+                        <a class="rounded-2 dropdown-item text-success" data-bs-toggle="offcanvas" data-bs-target="#addSmsModal" aria-controls="offcanvasRight" href="#">
+                          <i class="bx bx-envelope"></i>
+                          SMS 
+                        </a>
+                      </li>
+                      <li>
+                        <a class="rounded-2 dropdown-item text-danger" href="#">
+                          <i class="bx bx-trash"></i>
+                          O'chirish
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+</div>
+
+
+<!-- Modal TAHRIRLASH -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="addModal" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">O'qituvchi Qo'shish</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap" method="POST">
+          {% csrf_token %}
+          {{ add_form }}
+          <button class="btn btn-success rounded-pill" name="add">Yuborish</button>
+        </form>
+      </div>
+    </div>
+<!-- Add Teacher Modal -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="editModal" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">O'qituvchi Tahrirlash</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap" method="POST">
+          {% csrf_token %}
+          <label class="w-100 py-2">Talabani tanlang
+            <select class="w-100 py-2 px-2 mt-2" name="teacher">
+              <option class="w-100 py-2 border"></option>
+              {% for i in teachers %}
+              <option class="w-100 py-2 border" value="{{ i.id }}">{{ i.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          {{ edit_form }}
+          <button class="btn btn-success rounded-pill" name="edit">Yuborish</button>
+        </form>
+      </div>
+    </div>
+<!-- Send Sms modal -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="addSmsModal" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="modal-title m-0" id="staticBackdropLabel">O'qituvchiga SMS yuboring</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form class="d-flex align-items-center flex-wrap">
+      {% csrf_token %}
+      {{ send_sms_form }}
+      <div class="my-2 w-100 d-flex justify-content-between">
+        <p>0 ta beldi (~ 1 SMS )</p>
+        <p>Shoxruhbek 2</p>
+      </div>
+      <button class="btn btn-success rounded-pill" name="send_sms">SMS yuborish</button>
+
+    </form>
+    
+  </div>
+</div>
+
+
+{% endblock content %}
+        

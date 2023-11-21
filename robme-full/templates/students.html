@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Students{% endblock title %}
+{% block content %}
+
+          <div class="col-12 col-sm-10 col-lg-11" style="max-height: 900px; overflow-y: auto;">
+            <!-- add new -->
+            <div class="d-sm-flex flex-sm-wrap align-items-center justify-content-between pt-3 pb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <h2 class="fs-3">Talabalar</h2>
+                <p class="fs-6 mb-0 mx-4">Soni - <span>{{ students.count }}</span></p>
+              </div>
+              <a class="d-flex justify-content-sm-end justify-content-center my-2 my-sm-0" href="#">
+                <button class="p-2 px-4 text-white bg-success border-0 rounded-pill "  data-bs-toggle="offcanvas" data-bs-target="#addStudentModal" aria-controls="offcanvasRight">Yangisnini qo'shish</button>
+              </a>
+            </div>
+            <div class="row d-flex align-items-center">
+              <form class="d-flex flex-column flex-md-row" method="GET">
+                {% csrf_token %}
+                <input class="form-control m-1" type="text" placeholder="Ism yoki telefon orqarish" name="by_name">
+                <select class="form-select m-1" aria-label="Default select example" name="by_group" required="false">
+                  <option selected>Kurslar</option>
+                  {% for i in groups %}
+                  <option value="{{ i.id }}">{{ i.name }}</option>
+                  {% endfor %}
+                </select>
+                <select class="form-select m-1" aria-label="Default select example" name="economical_status" required="false">
+                  <option selected>Talaba holati</option>
+                  <option value="1">Qarzdor</option>
+                  <option value="0">Qarzi Yo'q</option>
+                </select>
+                <button type="submit" name="filter" class="btn btn-success py-1">Filter</button>
+              </form>
+
+            </div>
+            <!-- TEACHERS -->
+            <div class="p-2">
+              
+                <div class="table-responsive owerflow-y-scroll" style="max-height: 80vh;">
+                  <table class="table" style="min-width: 1200px; overflow-x: auto;">
+                      <tr class="">
+                        <th class=""></th>
+                        <th class=" px-3 py-3">
+                          Ism
+                          <i class="bx bx-up-arrow-alt mx-0"></i>
+                          <i class="bx bx-down-arrow-alt mx-0"></i>
+                        </th>
+                        <th class=" px-3 py-3" >Telefon</th>
+                        <th class=" px-3 py-3">Guruhlar</th>
+                        <th class=" px-3 py-3" >O'qituvchilar</th>
+                        <th class=" px-3 py-3" >Mashg'ulotlar sanalari</th>
+                        <th class=" px-3 py-3" >Balans</th>
+                        <th class=" px-3 py-3" >
+                          <a class="p-1 dropdown-item text-success border rounded-pill d-flex align-items-center justify-content-center" data-bs-toggle="offcanvas" data-bs-target="#addSmsModal" aria-controls="offcanvasRight" data-bs-toggle="tooltip" data-bs-placement="top" title="SMS" href="#">
+                            <i class="bx bx-envelope"></i>
+                          </a>
+                        </th>
+                      </tr>
+
+                      {% for i in students %}
+                    
+                      <tr class="bg-body shadow">
+                        <td class="py-3 rounded">{{ i.id }}.</td>
+                        <td class="px-3 py-3">
+                          <a class="text-black" href="{% url 'students:student_detail' i.id %}">{{ i.name }} {{ i.surname }}</a>
+                        </td>
+                        <td class="px-3 py-3">{{ i.phone_number }}</td>
+                        <td>
+                         {% for j in i.group.all %}
+                          {{ j.name }}-{{ j.days }}-{{ j.time }}<br>
+                          {% endfor %}
+                       </td>
+                       <td>
+                        {% for j in i.group.all %}
+                        {{ j.teacher.name }}<br>
+                        {% endfor %}
+                       </td>
+                       <td>
+                         {% for j in i.group.all %}
+                          {{ j.started_date }}-{{ j.ends_in }}<br>
+                          {% endfor %}
+                       </td>
+                        <td class="px-3 py-3">{{ i.balance }}</td>
+                        <td class="px-3 py-3 rounded">
+                          <div class="btn-group dropend m-1 my-2" href="#">
+                            <a class="bx bx-dots-vertical-rounded text-success" data-bs-toggle="dropdown" aria-expanded="false" href="#"></a>
+                            <ul class="dropdown-menu py-0">
+                              <li>
+                                <a class="rounded-2 dropdown-item text-secondary" data-bs-toggle="offcanvas" data-bs-target="#StudentTahrirlash" aria-controls="offcanvasRight" href="#">
+                                  <i class="bx bx-edit"></i>
+                                  Talabani tahrirlash
+                                </a>
+                              </li>
+                              <li>
+                                <a class="rounded-2 dropdown-item text-success" data-bs-toggle="offcanvas" data-bs-target="#addPaymentModal" aria-controls="offcanvasRight" href="#">
+                                  <i class="bx bx-money"></i>
+                                  T'olov 
+                                </a>
+                              </li>
+                              <li>
+                                <form action="" method="POST">
+                                  {% csrf_token %}
+                                  <input type="text" name="student" value="{{ i.id }}" class="d-none">
+                                  <button type="submit" class="rounded-2 dropdown-item text-danger" name="delete">
+                                    <i class="bx bx-trash"></i>
+                                    O'chirish
+                                  </button>
+                                </form>
+                              </li>
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                      
+                     {% endfor %}
+                    
+                  </table>
+                </div>
+               
+            
+          </div>
+
+
+
+<!-- Modal TAHRIRLASH -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="addEditModal" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">O'qituvchini taxrirlash</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap">
+          <label class="w-100 my-2">
+            Telefon raqam:
+              <input class="form-control my-1" type="tel" autofocus placeholder="+998 97 976 76 88" required>
+          </label>
+
+          <label class="w-100 my-2">
+            Ismi:
+            <input class="form-control my-1" type="text" placeholder="Ism kiritnig" required>
+          </label>
+
+
+          <label class="w-100 my-2">
+            Tug'ilgan sanasi:
+            <input class="form-control my-1" type="date" required>
+          </label>
+          
+          <div class="my-2">
+            Jinsi:
+            <span class="d-flex align-items-center my-1">
+              <input class="mt-1 me-1" type="radio" name="jins" id="male">
+              <label for="male">erkak</label>
+            </span>
+            <span class="d-flex align-items-center my-1">
+              <input class="mt-1 me-1" type="radio" name="jins" id="female">
+              <label for="female">ayol</label>
+            </span>
+          </div>
+          
+          <label class="w-100 my-2">
+            Rasmi
+            <input class="form-control my-1" type="file">
+          </label>
+
+          <button class="btn btn-success rounded-pill">Yuborish</button>
+
+        </form>
+        
+      </div>
+    </div>
+ <!-- Add student modal -->
+ <div class="offcanvas offcanvas-end" tabindex="-1" id="addStudentModal" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Yangi talaba qo'shish</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form class="w-100" method="POST">
+      {% csrf_token %}
+      {{ create_form }}
+      <button class="btn btn-success rounded-pill" name="create">Yuborish</button>
+    </form>
+  </div>
+</div>
+
+ <!-- student tahrirlash -->
+ <div class="offcanvas offcanvas-end" tabindex="-1" id="StudentTahrirlash" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Yangi talaba qo'shish</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form class="w-100" method="POST">
+      {% csrf_token %}
+      <select name="st" id="st_id" name="st" class="form-select mb-1">
+        <option selected >---</option>
+        {% for i in students %}
+        <option value="{{ i.id }}">{{ i.name }} {{ i.surname }}</option>
+        {% endfor %}
+      </select>
+      {{ edit_form }}
+      
+      <input type="text" value="{{ i }}" class="d-none">
+      <button class="btn btn-success rounded-pill" name="edit">Yuborish</button>
+    </form>
+  </div>
+</div>
+<!-- Modal SMS -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="addSmsModal" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+            <h5 class="modal-title m-0" id="staticBackdropLabel">Talabaga SMS yuboring</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <form class="d-flex align-items-center flex-wrap">
+              <label class="w-100 py-2">
+                Yuboruvchi: MODME
+                <div class="mt-2 d-flex">
+                  <textarea class="form-control" rows="3" required></textarea>              
+                </div>
+              </label>
+
+              <div class="my-2 w-100 d-flex justify-content-between">
+                <p>0 ta beldi (~ 1 SMS )</p>
+                <p>Shoxruhbek 2</p>
+              </div>
+              <button class="btn btn-success rounded-pill">SMS yuborish</button>
+
+            </form>
+            
+          </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function() {
+      $('#captureValuesButton').click(function() {
+          // Capture form values
+          var field1Value = $('#field1').val();
+          var field2Value = $('#field2').val();
+
+          // Send form values to the server using AJAX
+          $.ajax({
+              type: 'POST',
+              url: '/your-view-url/',  // Replace with your actual view URL
+              data: {
+                  'field1': field1Value,
+                  'field2': field2Value
+                  // Add other form fields as needed
+              },
+              success: function(response) {
+                  console.log('Form values sent successfully:', response);
+              },
+              error: function(error) {
+                  console.error('Error sending form values:', error);
+              }
+          });
+      });
+  });
+</script>
+{% endblock scripts %}

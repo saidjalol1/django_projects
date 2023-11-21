@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}{{ object.title }}-{{ object.time }}{% endblock title %}
+{% block content %}
+<div class="container py-4">
+    <style>
+        table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+    </style>
+    <h1 class="mb-4 font-bold text-3xl">Course</h1>
+    <div class="card shadow-lg rounded-lg w-full p-4">
+        <div class="flex justify-between items-center ">
+            <div class="title text-3xl font-bold">{{ object.title }}</div>
+            <div class="text-gray-600 text-2xl">{{ object.time }}</div>
+        </div>
+        <div class="body mt-4">
+            {{ object.description }}
+        </div>
+        <div class="flex gap-x-4">
+            {% for days in object.days.all %}
+                <p class="py-2 px-4 bg-yellow-400 rounded-lg text-white mt-2">{{ days }}</p>
+            {% endfor %}
+        </div>
+        <div class="mt-4 py-2 px-4 rounded-lg bg-gray-700 text-white">
+          Helds 3 days in a week
+      </div>
+        <div class="py-2 px-3 text-white bg-blue-700 rounded-lg mt-2">
+            there are  {{ object.students.count }} of students
+        </div>
+    </div>
+    <div class="flex justify-between items-center">
+      <h1 class="mt-4 font-bold text-3xl mb-2">Attandance</h1>
+    <p>{{ current_date.day }}.{{ current_date.month}}.{{ current_date.year}}</p>
+    </div>
+    <div class="relative overflow-x-auto">
+      <form action="{% url 'courses:course_detail' object.id %}" method="POST">
+        {% csrf_token %}
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Student
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Attendence
+                    </th>
+                    <th>
+                      Calendar
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+              
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <select name="user" id="id_user">
+                      <option value selected >-----</option>
+                      {% for i in student  %}
+                        <option value="{{ i.id }}">{{ i.name }}</option>
+                      {% endfor %}
+                    </select>
+                </th>
+                <td class="px-6 py-4">
+                    {{form.date}}
+                </td>
+                <td class="px-6 py-4">
+                    {{ form.attandence }}
+                </td>
+              </tr>
+             {% for i in attandence %} 
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   {{ i.user.name }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ i.attendence_student.attandence }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ i.payment_set.last }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="py-2 px-8 text-white bg-blue-700 rounded-lg mt-2">save</button>
+      </form>
+    </div>
+    <div>
+      <h1 class="font-bold mt-10 text-3xl mb-4">Payments</h1>
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Students
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  payment status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for i in payment %}
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{ i.user.name }} {{ i.user.surname }}
+            </th>
+            <td class="px-6 py-4">
+                {{ i.active }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock content %}

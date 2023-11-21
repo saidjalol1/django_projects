@@ -1,0 +1,219 @@
+{% extends 'base.html '%}
+{% load static %}
+
+<title>{% block title %}Robm{% endblock title %}</title>
+
+{% block content %}
+<div class="col-12 col-sm-10 col-lg-11" style="max-height: 900px; overflow-y: auto;">
+  <!-- Categories cards -->
+  <div class="row justify-content-around flex-wrap my-3 categories-box">
+    <a class="col-5 col-sm-3 col-md-3 col-lg m-2 d-flex justify-content-between align-items-center flex-column rounded-4 py-3 px-1 border border-dark text-decoration-none text-dark" href="#">
+      <img src="{% static 'img/icons/user-icon.svg' %}" alt="user icon" width="24">
+      <span class="text-center">Faol lidlar</span>
+      <b class="fs-5">16</b>
+    </a>
+    <a class="col-5 col-sm-3 col-md-3 col-lg m-2 d-flex justify-content-between align-items-center flex-column rounded-4 py-3 px-1 border border-dark text-decoration-none text-dark" href="#">
+      <img src="{% static 'img/icons/users-icon.svg' %}" alt="users icon" width="24">
+      <span class="text-center">Faol talabalar</span>
+      <b class="fs-5">385</b>
+    </a>
+    <a class="col-5 col-sm-3 col-md-3 col-lg m-2 d-flex justify-content-between align-items-center flex-column rounded-4 py-3 px-1 border border-dark text-decoration-none text-dark" href="#">
+      <img src="{% static 'img/icons/layers-icon.svg' %}" alt="layers icon" width="24">
+      <span class="text-center">Guruxlar</span>
+      <b class="fs-5">16</b>
+    </a>
+    <a class="col-5 col-sm-3 col-md-3 col-lg m-2 d-flex justify-content-between align-items-center flex-column rounded-4 py-3 px-1 border border-dark text-decoration-none text-dark" href="#">
+      <img src="{% static 'img/icons/warning-icon.svg' %}" alt="warning icon" width="24">
+      <span class="text-center">Qarzdorlar</span>
+      <b class="fs-5">16</b>
+    </a>
+    <a class="col-5 col-sm-3 col-md-3 col-lg m-2 d-flex justify-content-between align-items-center flex-column rounded-4 py-3 px-1 border border-dark text-decoration-none text-dark" href="#">
+      <img src="{% static 'img/icons/desktop-icon.svg' %}" alt="desktop icon" width="24">
+      <span class="text-center">Sinov darslari</span>
+      <b class="fs-5">16</b>
+    </a>
+    <a class="col-5 col-sm-3 col-md-3 col-lg m-2 d-flex justify-content-between align-items-center flex-column rounded-4 py-3 px-1 border border-dark text-decoration-none text-dark" href="#">
+      <img src="{% static 'img/icons/search-dollar-icon.svg' %}" alt="dollar icon" width="24">
+      <span class="text-center">Joriy oyda to'laganlar</span>
+      <b class="fs-5">16</b>
+    </a>
+    <a class="col-5 col-sm-3 col-md-3 col-lg m-2 d-flex justify-content-between align-items-center flex-column rounded-4 py-3 px-1 border border-dark text-decoration-none text-dark" href="#">
+      <img src="{% static 'img/icons/close-user-icon.svg' %}" alt="user icon" width="24">
+      <span class="text-center">Faol guruxni tark etganlar</span>
+      <b class="fs-5">16</b>
+    </a>
+    <a class="col-5 col-sm-3 col-md-3 col-lg m-2 d-flex justify-content-between align-items-center flex-column rounded-4 py-3 px-1 border border-dark text-decoration-none text-dark" href="#">
+      <img src="{% static 'img/icons/remove-user-icon.svg' %}" alt="user icon" width="24">
+      <span class="text-center">Sinov muddatidan keyin ketdi</span>
+      <b class="fs-5">16</b>
+    </a>
+  </div>
+
+  <!-- Table -->
+  <div class="bg-white p-2 ">
+    <div class="d-flex justify-content-between">
+      <div class="table-btns-box">
+        <a class="border-bottom border-2 border-warning text-secondary text-warning p-1 active-table__btn" href="#">Toq kunlar</a>
+        <a class=" text-secondary p-1 active-table__btn" href="#">Juft kunlar</a>
+        <a class=" text-secondary p-1 active-table__btn" href="#">Boshqa</a>
+      </div>
+      <div class="text-success fw-bold">Jadval</div>
+    </div>
+
+    <div class="row align-items-start mt-3">
+      <table class="table table-hover table-bordered">
+
+        <tr>
+          <th></th>
+          <th>Ertalab</th>
+          <th>Tushlikdan so'ng</th>
+        </tr>
+
+        <tr class="py-5">
+          <th class="text-center">Room 1</th>
+          <th class="p-1">
+            <div class="bg-primary d-inline-block bg-opacity-25 rounded-3 p-2 my-1 mx-1 fs-7">
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class=" text-center d-inline-block px-3 py-1 rounded-pill text-white bg-success mb-0 me-2 fs-7">Dildora Tojiboyeva</h6>
+                <b>English kids</b>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class=" text-center bg-success px-3 py-1 rounded-pill bg-opacity-50 d-inline-block mb-0 me-2 fs-7">Madina 2 (kids)</h6>
+                <span>08:00 - 10:00</span>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between">
+                <span>1 may - 1 may</span>
+                <span class=" text-center bg-white px-2 rounded-pill">22 tal.</span>
+              </div>
+            </div>
+
+            <div class="bg-primary d-inline-block bg-opacity-25 rounded-3 p-2 my-1 mx-1 fs-7">
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class="text-center d-inline-block px-3 py-1 rounded-pill text-white bg-success mb-0 me-2 fs-7">Dildora Tojiboyeva</h6>
+                <b>English kids</b>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class="text-center bg-success px-3 py-1 rounded-pill bg-opacity-50 d-inline-block mb-0 me-2 fs-7">Madina 2 (kids)</h6>
+                <span>10:00 - 12:00</span>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between">
+                <span>1 may - 1 may</span>
+                <span class="text-center bg-white px-2 rounded-pill">22 tal.</span>
+              </div>
+            </div>
+          </th>
+
+          <th class="p-1">
+            <div class="bg-primary d-inline-block bg-opacity-25 rounded-3 p-2 my-1 mx-1 fs-7">
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class="text-center d-inline-block px-3 py-1 rounded-pill text-white bg-success mb-0 me-2 fs-7">Dildora Tojiboyeva</h6>
+                <b>English kids</b>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class="text-center bg-success px-3 py-1 rounded-pill bg-opacity-50 d-inline-block mb-0 me-2 fs-7">Madina 2 (kids)</h6>
+                <span>12:00 - 14:00</span>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between">
+                <span>1 may - 1 may</span>
+                <span class="text-center bg-white px-2 rounded-pill">22 tal.</span>
+              </div>
+            </div>
+
+            <div class="bg-primary d-inline-block bg-opacity-25 rounded-3 p-2 my-1 mx-1 fs-7">
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class="text-center d-inline-block px-3 py-1 rounded-pill text-white bg-success mb-0 me-2 fs-7">Dildora Tojiboyeva</h6>
+                <b>English kids</b>
+              </div>
+              <div class="text-center d-flex flex-wrap justify-content-between my-2">
+                <h6 class="bg-success px-3 py-1 rounded-pill bg-opacity-50 d-inline-block mb-0 me-2 fs-7">Madina 2 (kids)</h6>
+                <span>14:00 - 16:00</span>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between">
+                <span>1 may - 1 may</span>
+                <span class="text-center bg-white px-2 rounded-pill">22 tal.</span>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <tr class="py-5">
+          <th class="text-center">Room 2</th>
+
+          <th class="p-1">
+            <div class="bg-primary d-inline-block bg-opacity-25 rounded-3 p-2 my-1 mx-1 fs-7">
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class="text-center d-inline-block px-3 py-1 rounded-pill text-white bg-success mb-0 me-2 fs-7">Dildora Tojiboyeva</h6>
+                <b>English kids</b>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class="text-center bg-success px-3 py-1 rounded-pill bg-opacity-50 d-inline-block mb-0 me-2 fs-7">Madina 2 (kids)</h6>
+                <span>12:00 - 14:00</span>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between">
+                <span>1 may - 1 may</span>
+                <span class="text-center bg-white px-2 rounded-pill">22 tal.</span>
+              </div>
+            </div>
+
+            <div class="bg-primary d-inline-block bg-opacity-25 rounded-3 p-2 my-1 mx-1 fs-7">
+              <div class="d-flex flex-wrap justify-content-between my-2">
+                <h6 class="text-center d-inline-block px-3 py-1 rounded-pill text-white bg-success mb-0 me-2 fs-7">Dildora Tojiboyeva</h6>
+                <b>English kids</b>
+              </div>
+              <div class="text-center d-flex flex-wrap justify-content-between my-2">
+                <h6 class="bg-success px-3 py-1 rounded-pill bg-opacity-50 d-inline-block mb-0 me-2 fs-7">Madina 2 (kids)</h6>
+                <span>14:00 - 16:00</span>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between">
+                <span>1 may - 1 may</span>
+                <span class="text-center bg-white px-2 rounded-pill">22 tal.</span>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <tr class="py-5">
+          <th class="text-center">Room 3</th>
+        </tr>
+        <tr class="py-5">
+          <th class="text-center">Room 4</th>
+        </tr>
+        <tr class="py-5">
+          <th class="text-center">Room 5</th>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}
+
+{% block scripts %} 
+    <!-- Scripts -->
+    <script>
+      const elTableBtnsBox = document.querySelector(".table-btns-box");
+      const elActiveTableBtns = document.querySelectorAll(".active-table__btn");
+      function removeActiveBtn() {
+        elActiveTableBtns.forEach(btn => {
+            btn.classList.remove("text-warning", "border-bottom", "border-2", "border-warning")
+        }) 
+      }
+
+      function addActiveBtn(i) {
+        elActiveTableBtns[i].classList.add("text-warning", "border-bottom", "border-2", "border-warning")
+      }
+
+      removeActiveBtn()
+      addActiveBtn(i = 0)
+
+      elTableBtnsBox.addEventListener("click", (evt) => {
+        const target = evt.target
+        if(target && target.classList.contains("text-secondary")) {
+          elActiveTableBtns.forEach((btn, idx) => {
+            if(target == btn) {
+              removeActiveBtn()
+              addActiveBtn(idx)
+            }
+          }) 
+        }
+      })
+    </script>
+{% endblock scripts %}

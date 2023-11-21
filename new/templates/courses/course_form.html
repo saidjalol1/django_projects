@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Add Course{% endblock title %}
+{% block content %}
+{% load tailwind_filters %}
+<div class="container">
+    <style>
+        .wrap_form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form{
+            width: 500px;
+            height: 100vh;
+            padding: 2% 2%;
+        }
+    </style>
+    <div class="wrap_form py-10">
+        <div class="form shadow-lg rounded-lg mt-10">
+            <form method="POST">
+                {% csrf_token %}
+                <p>
+                    <select name="user" id="id_user" class="bg-white focus:outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal text-gray-700">
+                        <option value selected >-----</option>
+                        {% for i in student  %}
+                          <option value="{{ i.id }}">{{ i.name }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                <p class="mt-10">{{ form.course }}</p>
+                <p class="mt-10">{{ form.date }}</p>
+                <p class="mt-10 mb-4">{{ form.active }}</p>
+                <button type="submit" class="py-2 px-4 rounded-lg bg-blue-600 text-white text-sm w-full">submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

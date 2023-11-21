@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Attandence{% endblock title%}
+{% block content %}
+<div class="container">
+  
+<div class="relative overflow-x-auto">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Student
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Attendence
+                </th>
+                <th>
+                  Calendar
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    payment
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <select name="user" id="id_user">
+                  <option value selected >-----</option>
+                  {% for i in student  %}
+                    <option value="{{ i.id }}">{{ i.name }}</option>
+                  {% endfor %}
+                </select>
+            </th>
+            <td class="px-6 py-4">
+                {{form.date}}
+            </td>
+            <td class="px-6 py-4">
+                {{ form.attandence }}
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <button type="submit" class="py-2 px-4 text-white bg-blue-700 rounded-lg">save</button>
+  </form>
+</div>
+
+</div>
+<script>
+  $(function () {
+    $("#datetimepicker1").datetimepicker({
+      format: 'DD/MM/YYYY HH:mm',
+    });
+  });
+</script>0
+{% endblock content %}

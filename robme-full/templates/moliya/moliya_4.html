@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Salary{% endblock title %}
+{% block content %}
+          <div class="p-3 col-12 col-sm-9 overflow-y-auto" style="max-height: 89vh;">
+              <h2>Ish haqi</h2>
+
+              <div class=" px-3 my-3 shadow bg-body py-3">
+                 
+              <form class="my-3 d-flex align-items-center flex-column flex-xl-row"  method="GET">
+                {% csrf_token %}
+                <div class="w-50 d-flex align-items-center">   
+                  <i class="bx bx-money fs-3"></i>
+                  <select class="form-select m-1" aria-label="Default select example" name="teacher">
+                    <option selected>Tanlang</option>
+                   {% for i in teachers %}
+                   <option value="{{ i.id }}">{{ i.name }} {{ i.surname }}</option>
+                   {% endfor %}
+                  </select>
+                </div>
+                <div class="w-100 mx-1">
+                  <input class="form-control m-1" type="date" name="started_date">
+                </div>
+
+                <div class="w-100">
+                  <input class="form-control" type="date" name="to">
+                </div>
+
+                <div class="w-100 mx-1">
+                  <button class="btn rounded-pill bg-success text-white" type="submit" name="calculate">Hisoblang</button>                  
+                </div>
+              </form>
+
+              
+              <div class="table-responsive shadow px-3 py-4">
+                <div class="text-secondary d-flex align-items-center justify-content-between flex-wrap">
+                  <h5 class="">Davrdagi ish haqi: 01.05.2023 - 31.05.2023</h5>
+                  <div class="d-flex align-items-end flex-column">
+                    <span class="d-flex align-items-center">
+                      <i class="bx bx-user-plus mx-1"></i>
+                      16.05.2023 15:26:28
+                    </span>
+                    Bozorova Zuhrahon
+                  </div>
+                </div>
+                <table class="table overflow-x-auto bg-body" style="min-width: 800px;">
+                    <tr class="">
+                      <th class="">O'qituvchi</th>
+                      <th class="p-3">So'm</th>
+                      <th class="p-3" ></th>
+                    </tr>
+                    {% for i in teachers %}
+                    <tr class="">
+                      <td class="py-3 rounded"><span class="text-secondary">{{ i.id }} </span> {{ i.name }} {{ i.surname }}</td>
+                      <td class="p-3 rounded">{{ i.salary }}</td>
+                      <td class="py-3">
+                        <a class="mx-1 bx bxs-calculator fs-4 text-info" href="#"></a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+              </div>
+              </div>
+
+          </div>
+{% endblock content %}

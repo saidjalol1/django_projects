@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Salary{% endblock title %}
+{% block content %}  
+            <div class="p-3 px-4 col-sm-10 col-lg-11 overflow-y-auto" style="max-height: 89vh;">
+            <div class="">
+              <h2>Qarzdorlar</h2>
+              <span>Miqdor - 0</span>
+            </div>
+            <div class="row">
+                
+                  <div class="col-12">
+                    <div class="my-3 bg-body shadow rounded">
+                      <div class="px-3 py-4 d-flex align-items-center justify-content-between border-start border-5 border-info">
+                        <h6>Jami: -28,071,595 so'm</h6>
+                        <i class="bx bx-coin-stack fs-3 text-info"></i>
+                      </div>
+                    </div>
+
+              </div>
+
+              <form class="my-3 d-flex align-items-center flex-column flex-xl-row">
+                <div class="w-100 mx-1">
+                  Ism yoki telefon orqali  qidirish
+                  <input class="form-control m-1" type="text" placeholder="">
+                </div>   
+                <div class="w-100 mx-1">          
+                  Qarz miqdori (oldin)
+                  <select class="form-select m-1" aria-label="Default select example">
+                    <option selected>Tanlang</option>
+                    <option value="1" class="">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="w-100 mx-1">       
+                  Qarz miqdori (gacha)   
+                  <select class="form-select m-1" aria-label="Default select example">
+                    <option selected>Tanlang</option>
+                    <option value="1" class="">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="w-100 mx-1">
+                  Sanadan boshlab
+                  <input class="form-control m-1" type="date" placeholder="Ism yoki telefon orqarish">
+                </div>
+                <div class="w-100 mx-1">
+                  Sana bo'yicha
+                  <input class="form-control m-1" type="date" placeholder="Ism yoki telefon orqarish">
+                </div>
+                <div class="w-100 mx-1">
+                  <button class="btn mt-4 rounded-pill bg-success text-white">Filter</button>                  
+                </div>
+              </form>
+
+              
+              <div class="table-responsive">
+                <table class="table overflow-x-auto bg-body shadow" style="min-width: 1350px;">
+                    <tr class="">
+                      <th class="pt-3"></th>
+                      <th class="pt-3">Ism</th>
+                      <th class="pt-3">Telefon</th>
+                      <th class="pt-3">Qarz</th>
+                      <th class="pt-3">Davr bo'yicha jami</th>
+                      <th class="pt-3">Guruh</th>
+                      <th class="pt-3">Izoh</th>
+                      <th class="pt-3 d-flex">
+                        <p class="m-0 mx-4">Holati</p>
+                        <button class="btn border border-success text-success rounded-pill">
+                          <i class="bx bx-envelope"></i>
+                        </button>
+                      </th>
+                    </tr>
+
+                    <tr class="border-bottom">
+                      <td class="py-3 rounded">1.</td>
+                      <td class="p-3 rounded">Muhammadrasulov Yaxyobek</td>
+                      <td class="p-3">
+                        <a class="text-black" href="#">(99) 999 99 99</a>
+                      </td>
+                      <td class="p-3">-100 000 UZS</td>
+                      <td class="p-3">-100 000 UZS</td>
+                      <td class="p-3">
+                        <div class="d-flex w-75 flex-column">
+                          <span class="px-2 w-50 text-center rounded bg-secondary bg-opacity-25">Dildora 1</span>
+                          English kids (Tojiboyeva Madina 2 (kids) - 08:00 ) • 01.09.2023
+                        </div>
+                      </td>
+                      <td class="p-3">
+                      </td>
+                      <td class="p-3 d-flex justify-content-between align-items-center border-0">
+                        <div class="">
+                          <button class="btn p-3 bg-secondary rounded-pill"></button>
+                        </div>
+                        <a class="mx-1 bx bx-stopwatch fs-2 text-danger" data-bs-toggle="modal" data-bs-target="#eslatmalarWatch" data-bs-toggle="tooltip" data-bs-placement="top" title="Eslatmalar" href="#"></a>
+                        <a class="bx bx-flag text-success fs-3" data-bs-toggle="modal" data-bs-target="#eslatmaFlag" data-bs-toggle="tooltip" data-bs-placement="top" title="Eslatma" href="#"></a>
+                      </td>
+                    </tr>
+
+
+                </table>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-end">
+                <button class="btn border rounded-pill mx-2">
+                  <i class="bx bx-download"></i>
+                </button>
+              </div>
+
+          </div>
+            </div>
+{% endblock content %}

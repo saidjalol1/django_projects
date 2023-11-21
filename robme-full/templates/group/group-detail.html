@@ -1,0 +1,596 @@
+{% extends 'base.html' %}
+{% block title %}{{ object.name }}{% endblock title %}
+{% block content %}
+          <!-- Mashini ichiga code yoziladi -->
+          <div class="col-12 col-sm-10 col-lg-11 p-4" style="max-height: 100vh; overflow: auto;">
+            <!-- Categories cards -->
+            <h4 class="d-flex align-items-center mb-3 text-center">{{ object.name }}<i class="circle fas fa-circle mx-3"></i>{{ object.name }}<i class="circle fas fa-circle mx-3"></i>{{ object.teacher.name }} {{ object.teacher.surname }}</h4>
+            <div class="d-flex flex-column">
+              <div class="d-flex flex-column pb-3 me-lg-3 me-0">
+                <div class="d-flex flex-column flex-lg-row w-100 justify-content-between">
+                  <div class="d-flex flex-column me-0 me-lg-2 w-100">
+                    <div class="bg-white shadow p-3">
+                      <button class="border-0 fw-bold py-1 px-2">{{ object.name }}</button>
+                      <span class="d-flex align-items-center my-3 fs-lg-4 fs-5">{{ object.name }}<i class="circle fas fa-circle mx-3"></i>{{ object.teacher.name }} {{ object.teacher.surname }}</span>
+                      <div class="d-flex flex-column">
+                        <span><b class="me-2">Narxi:</b>{{ object.price }}</span>
+                        <span><b class="me-2">Vaqt:</b>{{ object.days }} - {{ object.time }}</span>
+                      </div>
+                      <div class="my-3 d-flex flex-column">
+                        <span><b class="me-2">Xonalar:</b>{{ object.room }}</span>
+                        <span><b class="me-2">Mashg'ulotlar sanalari:</b>{{ object.started_date }} - {{ object.ends_in }}</span>
+                      </div>
+                      <div class="mb-3 d-flex justify-content-between">
+                        <a class="items transition cursor mx-1 p-2 rounded-pill bx bx-pencil" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightTahrir" aria-controls="offcanvasRightTahrir"></a>
+                        <a class="items transition cursor mx-1 p-2 rounded-pill bx bx-envelope" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightsms" aria-controls="offcanvasRightsms""></a>
+                        <a class="items transition cursor mx-1 p-2 rounded-pill bx bx-plus" data-bs-toggle="modal" data-bs-target="#plusModal"></a>
+                        <a class="items transition cursor mx-1 p-2 rounded-pill bx bx-dollar" data-bs-toggle="modal" data-bs-target="#TolovModal"></a>
+                      </div>
+                    </div>
+                    <div class="bg-white mt-4 mb-4 mb-lg-0 p-2 px-4 d-flex justify-content-between align-items-center border-left border-success shadow">
+                      <span>Eslatma</span>
+                      <a class="bx bx-flag items transition cursor mx-1 p-2 rounded-pill"></a>
+                    </div>
+                  </div>
+                  <div class="w-100 bg-white shadow p-3 ms-0 ms-lg-2 d-flex justify-content-between flex-column">
+                    <table class="table table-borderless">
+                      {% for i in object.students.all %}
+                      <tr>
+                        <td class="d-flex align-items-center cursor" data-bs-toggle="dropdown" aria-expanded="false"> 
+                          <i class="circle fas fa-circle text-danger me-1"></i>{{ i.get_fullname }}
+                          <ul class="dropdown-menu px-3 py-2 shadow">
+                            <li class="d-flex justify-content-start align-items-start flex-column border-bottom">
+                              <span class="d-flex">{{ i.get_fullname}} <p class="ms-4 text-secondary fs-7">(id:{{ i.id }})</p></span>
+                              <p class="text-secondary fs-7">Faol (O'qishni to'laydi)</p>
+                            </li>
+                            <li class="d-flex justify-content-start align-items-start flex-column border-bottom mt-1">
+                              <p class="text-secondary fs-7">Telefon</p>
+                              <span>{{ i.phone_number }}</span>
+                            </li>
+                            <li class="d-flex justify-content-start align-items-start flex-column border-bottom mt-1">
+                              <p class="text-secondary fs-7">Balans</p>
+                              <span>{{ i.phone_number }} UZS</span>
+                            </li>
+                            <li class="d-flex justify-content-start align-items-start flex-column border-bottom mt-1">
+                              <p class="text-secondary fs-7">Talaba qo'shilgan sana</p>
+                              <span>{{ i.added_time }}</span>
+                            </li>
+                            <li class="d-flex justify-content-start align-items-start flex-column border-bottom mt-1">
+                              <p class="text-secondary fs-7">Eslatma</p>
+                              <span>10 sinf arab tili yangi</span>
+                            </li>
+                            <li class="d-flex justify-content-start align-items-start flex-column mt-2">
+                              <a href="{% url 'students:student_detail' i.id %}" class="text-black">Profilga o'ting &#8594;</a>
+                            </li>
+                          </ul>
+                        </td>
+                        <td>(93) 056-80-70</td>
+                        <td>
+                          <a class="bx bx-dots-vertical-rounded text-success" data-bs-toggle="dropdown" aria-expanded="false" href="#"></a>
+                          <ul class="dropdown-menu py-0">
+                            <li>
+                              <a class="rounded-2 dropdown-item text-secondary d-flex justify-content-start align-items-center" data-bs-toggle="modal" data-bs-target="#muzlashModal" href="#">
+                                <i class="me-1 bx bx-pause"></i>Muzlash
+                              </a>
+                            </li>
+                            <li>
+                              <a class="rounded-2 dropdown-item text-secondary d-flex justify-content-start align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightAddTolov" aria-controls="offcanvasRight" href="#">
+                                <i class="me-1 bx bx-dollar"></i>To'lov 
+                              </a>
+                            </li>
+                            <li>
+                              <a class="rounded-2 dropdown-item text-secondary d-flex justify-content-start align-items-center" data-bs-toggle="modal" data-bs-target="#addNoteModal" href="#">
+                                <i class="me-1 bx bx-flag"></i>Yangi eslatma qo'shing
+                              </a>
+                            </li>
+                            <li>
+                              <a class="rounded-2 dropdown-item text-secondary d-flex justify-content-start align-items-center" data-bs-toggle="modal" data-bs-target="#otkazishModal" href="#">
+                                <i class="me-1 bx bx-download"></i>Talabani guruhga o'tkazing
+                              </a>
+                            </li>
+                           
+                            <li>
+                              <form action="" method="POST">
+                                {% csrf_token %}
+                                <input type="text" name="student_id" value="{{ i.id }}" class="d-none">
+                                <button type="submit" name="remove_group" class="rounded-2 dropdown-item text-secondary d-flex justify-content-start align-items-center" href="#">
+                                  <i class="me-1 bx bx-trash"></i>Guruhdan olib tashlash
+                                </button>
+                              </form>
+                            </li>
+                          </ul>
+                        </td>
+                        <div class="modal fade" id="otkazishModal" tabindex="-1" aria-labelledby="plusModalLabelledby" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Talabani guruhga o'tkazing</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="" method="POST">
+                                  {% csrf_token %}
+                                <label class="w-100 py-2">Guruhni tanlang
+                                  <input type="text" name="student_id" value="{{ i.id }}" class="d-none">
+                                  <select class="w-100 py-2 px-2 mt-2" name="group">
+                                    {% for i in groups %}
+                                    <option class="w-100 py-2 border" value="{{ i.id }}">{{ i }}</option>
+                                    {% endfor %}
+                                  </select>
+                                </label>
+                                <div class="modal-footer">
+                                  <button type="submit" name="change" class="btn btn-success rounded-pill" data-bs-dismiss="modal">Talabani guruhga qo'shish</button>
+                                </div>
+                              </div>
+                             </form>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {% endfor %}
+                      </tr>
+
+                  </table>
+                  <span class="cursor">Arxivlangan talabalarni ko'rsatish</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <ul class="nav nav-tabs mb-3" id="tabs-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#davomat" type="button" role="tab" aria-controls="davomat" aria-selected="true">Davomat</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#onlayn-dars" type="button" role="tab" aria-controls="onlayn-dars" aria-selected="false">Onlayn Darsla va Materiallar</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#chegirma" type="button" role="tab" aria-controls="chegirma" aria-selected="false">Chegirmali Narx</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#imtihon" type="button" role="tab" aria-controls="imtihon" aria-selected="false">Imtihonlar</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tarix" type="button" role="tab" aria-controls="tarix" aria-selected="false">Tarix</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#izoh" type="button" role="tab" aria-controls="izoh" aria-selected="false">Izohlar</button>
+                </li>
+              </ul>
+              <div class="tab-content bg-white p-1 shadow-sm" id="pills-tabContent">
+                <div class="tab-pane fade show active overflow-x-auto" id="davomat" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                  <div class="mt-4 d-flex flex-column">
+                    <div class="d-flex justify-content-between flex-column flex-md-row">
+                      <h4 class="me-2">Davomat</h4>
+                      
+                    </div>
+                    <div class="w-100 table-box">
+                   
+                      <table class="table table-box fs-7">
+                        <tr class="text-start">
+                          <th>Ism</th>
+                          {% for i in dates %}
+                          <th>{{ i.day }} {{ month_name }}</th>
+                          {% endfor %}
+                        </tr>
+                        {% for i in object.students.all %}
+                        <tr class="text-start">
+                        <td>
+                          <div>{{ i.name }}</div>
+                        </td>
+                        {% for j in i.attandence.all %}
+                        <td>
+                          {% if j.status == 1 %}
+                         <div>Keldi</div>
+                          {% else %}
+                          <form action="" method="POST">
+                            {% csrf_token %}
+                            <!-- <div id="student" name="student" class="" value="{{ i.id }}">{{ i.id }}</div> -->
+                            <input type="text" class="d-none" name="student" value="{{ i.id }}">
+                            <input type="text" class="d-none" name="date" value="{{ j.date_added }}">
+                            <!-- <div id="date" name="date" class="d-none">{{ j.date_added }}</div> -->
+                           <div class="d-flex">
+                             <button class="btn btn-primary" type="submit" name="keldi">yes</button>
+                             <button class="btn btn-danger mx-2" type="submit" name="kelmadi">no</button>
+                           </div>
+                          </form>
+                          {% endif %}
+                        </td>
+                        {% endfor %}
+                          <td><i class="cursor fs-3 fa-regular fa-circle"></i></td>
+                          <td><i class="cursor fs-3 fa-regular fa-circle"></i></td>
+                        </tr>
+                        {% endfor %}
+                      </table>
+                     
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="onlayn-dars" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                  <div class="w-100 d-flex flex-column mt-4">
+                    <div class="bg-white shadow p-3 border-left border-success d-flex justify-content-between align-items-center flex-wrap">
+                      <span class="me-3 fs-7 fs-sm-6">Darslar talabalar tomonidan o'qilishi uchun mavjud bo'lib. Kurs sahifasida darslarni qo'shishingiz yoki o'zgartirishingiz mumkin.</span>
+                      <i class="fas fa-copy text-success fs-4 mt-xl-0 mt-2 cursor"></i>
+                    </div>
+                    <div class="d-flex justify-content-end mt-3">
+                      <button class="bg-warning rounded-pill border-0 p-2 px-4">
+                        <a href="group-sarlavha.html" class="text-white">Dars qo'shing</a>
+                      </button>
+                    </div>
+                    <div class="bg-warning-subtle p-3 text-warning mt-3">Hali yuklanmagan darslar va materiallar</div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="chegirma" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+                  <div class="mt-4">
+                    <h4>Individual chegirmali narxlar</h4>
+                    <div class="border-left border-success bg-white shadow p-3 m-2 mt-4 d-flex justify-content-between">
+                      <span class="fs-7 fs-md-5 me-2">Siz har qanday talaba uchun shaxsiy o'quv to'lovini belgilashingiz mumkin. Chegirmali narx ko'rsating va Enter tugmasini bosing</span>
+                      <i class="fas fa-dollar"></i>
+                    </div>
+                    <div class="overflow-x-scroll">
+                      <div class="table-box">
+                        <table class="table fs-7">
+                          <tr>
+                            <th>Ism</th>
+                            <th>Tel</th>
+                            <th>Individual narx</th>
+                            <th>Cause</th>
+                          </tr>
+                          <tr>
+                            <td>Obidova Muslima</td>
+                            <td>(90) 056-80-70</td>
+                            <td colspan="2">
+                              <button class="bg-success text-white p-1 px-2 border-0 rounded-pill"data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightChegirma" aria-controls="offcanvasRight">Narxni o'zgartirish</button>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Obidova Muslima</td>
+                            <td>(90) 056-80-70</td>
+                            <td colspan="2">
+                              <button class="bg-success text-white p-1 px-2 border-0 rounded-pill" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightChegirma" aria-controls="offcanvasRight">Narxni o'zgartirish</button>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Obidova Muslima</td>
+                            <td>(90) 056-80-70</td>
+                            <td colspan="2" class="d-flex flex-column align-items-start">
+                              <button class="border-0 rounded-1">160 000</button>
+                              <span>01.05.2023 - 30.11.2023</span>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Obidova Muslima</td>
+                            <td>(90) 056-80-70</td>
+                            <td colspan="2" class="d-flex flex-column align-items-start">
+                              <button class="border-0 rounded-1">160 000</button>
+                              <span>01.05.2023 - 30.11.2023</span>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Obidova Muslima</td>
+                            <td>(90) 056-80-70</td>
+                            <td colspan="2" class="d-flex flex-column align-items-start">
+                              <button class="border-0 rounded-1">160 000</button>
+                              <span>01.05.2023 - 30.11.2023</span>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Obidova Muslima</td>
+                            <td>(90) 056-80-70</td>
+                            <td class="d-flex flex-column align-items-start">
+                              <button class="border-0 rounded-1">160 000</button>
+                              <span>01.05.2023 - 30.11.2023</span>
+                            </td>
+                            <td></td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="imtihon" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">
+                  <div class="p-4 text-end">
+                    <button class="border-0 rounded-pill bg-warning text-white p-2 px-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightAdd" aria-controls="offcanvasRight">Yangisini qo'shish</button>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="tarix" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                  <div class="p-4">
+                    <div>
+                      <div class="d-flex flex-column flex-sm-row justify-content-between">
+                        <div class="d-flex flex-column justify-content-between align-items-start">
+                          <span class="fs-5">Holati o'zgartirildi</span>
+                          <span class="fs-7">
+                            <i class="fas fa-user"></i>
+                            Mo'ydinova Madinaxon  (99) 070-77-58</span>
+                          <span>Group Name: Arab tili</span>
+                          <span>Guruh: #42553</span>
+                          <span>Activated from: 2023.05.12</span>
+                        </div>
+                        <div class="fs-7 mt-3 mt-sm-0 text-secondary d-flex flex-column align-items-start">
+                          <span>12.15.2023 12.30.31</span>
+                          <span>Bozorova Zuhraxon</span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex flex-column flex-sm-row justify-content-between">
+                        <div class="d-flex flex-column justify-content-between align-items-start">
+                          <span class="fs-5">Holati o'zgartirildi</span>
+                          <span class="fs-7">
+                            <i class="fas fa-user"></i>
+                            Mo'ydinova Madinaxon  (99) 070-77-58</span>
+                          <span>Group Name: Arab tili</span>
+                          <span>Guruh: #42553</span>
+                          <span>Activated from: 2023.05.12</span>
+                        </div>
+                        <div class="fs-7 mt-3 mt-sm-0 text-secondary d-flex flex-column align-items-start">
+                          <span>12.15.2023 12.30.31</span>
+                          <span>Bozorova Zuhraxon</span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex flex-column flex-sm-row justify-content-between">
+                        <div class="d-flex flex-column justify-content-between align-items-start">
+                          <span class="fs-5">Holati o'zgartirildi</span>
+                          <span class="fs-7">
+                            <i class="fas fa-user"></i>
+                            Mo'ydinova Madinaxon  (99) 070-77-58</span>
+                          <span>Group Name: Arab tili</span>
+                          <span>Guruh: #42553</span>
+                          <span>Activated from: 2023.05.12</span>
+                        </div>
+                        <div class="fs-7 mt-3 mt-sm-0 text-secondary d-flex flex-column align-items-start">
+                          <span>12.15.2023 12.30.31</span>
+                          <span>Bozorova Zuhraxon</span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex flex-column flex-sm-row justify-content-between">
+                        <div class="d-flex flex-column justify-content-between align-items-start">
+                          <span class="fs-5">Holati o'zgartirildi</span>
+                          <span class="fs-7">
+                            <i class="fas fa-user"></i>
+                            Mo'ydinova Madinaxon  (99) 070-77-58</span>
+                          <span>Group Name: Arab tili</span>
+                          <span>Guruh: #42553</span>
+                          <span>Activated from: 2023.05.12</span>
+                        </div>
+                        <div class="fs-7 mt-3 mt-sm-0 text-secondary d-flex flex-column align-items-start">
+                          <span>12.15.2023 12.30.31</span>
+                          <span>Bozorova Zuhraxon</span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex flex-column flex-sm-row justify-content-between">
+                        <div class="d-flex flex-column justify-content-between align-items-start">
+                          <span class="fs-5">Holati o'zgartirildi</span>
+                          <span class="fs-7">
+                            <i class="fas fa-user"></i>
+                            Mo'ydinova Madinaxon  (99) 070-77-58</span>
+                          <span>Group Name: Arab tili</span>
+                          <span>Guruh: #42553</span>
+                          <span>Activated from: 2023.05.12</span>
+                        </div>
+                        <div class="fs-7 mt-3 mt-sm-0 text-secondary d-flex flex-column align-items-start">
+                          <span>12.15.2023 12.30.31</span>
+                          <span>Bozorova Zuhraxon</span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex flex-column flex-sm-row justify-content-between">
+                        <div class="d-flex flex-column justify-content-between align-items-start">
+                          <span class="fs-5">Holati o'zgartirildi</span>
+                          <span class="fs-7">
+                            <i class="fas fa-user"></i>
+                            Mo'ydinova Madinaxon  (99) 070-77-58</span>
+                          <span>Group Name: Arab tili</span>
+                          <span>Guruh: #42553</span>
+                          <span>Activated from: 2023.05.12</span>
+                        </div>
+                        <div class="fs-7 mt-3 mt-sm-0 text-secondary d-flex flex-column align-items-start">
+                          <span>12.15.2023 12.30.31</span>
+                          <span>Bozorova Zuhraxon</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="izoh" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">
+                  <div class="p-4 py-3 text-secondary w-100 fw-medium">
+                    <div class="row my-3 border-bottom">
+                      <span class="col-4 col-md-6">Izoh</span>
+                      <span class="col-3 col-md-4">Xodim</span>
+                      <span class="col-1 col-md-2">Yaratilgan</span>
+                    </div>
+                    <div class="my-3 border-bottom text-center">
+                      <span>Bo'sh</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+    <!-- Tahrirlash -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightTahrir" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">Guruhni tahrirlash</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap" method="POST">
+         {% csrf_token %}
+         {{ edit_form }}
+          <button class="py-2 px-3 my-2 border-0 outline-0 rounded-pill bg-success text-white" name="edit">Yuborish</button>
+        </form>
+      </div>
+    </div> 
+
+    <!-- Group SMS -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightsms" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">Guruhga SMS yuboring</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap">
+          <label class="w-100 py-2">Yuboruvchi: MODME
+            <div class="mt-2 d-flex">
+              <textarea class="w-100 p-2" placeholder="Xabarni kiriting"></textarea>          
+            </div>
+          </label>
+    
+          <div class="my-2 w-100 d-flex justify-content-between">
+            <p>0 ta beldi (~ 1 SMS )</p>
+            <p>10ta talabaga</p>
+          </div>
+          <button class="py-2 px-3 my-2 border-0 outline-0 rounded-pill bg-success text-white">SMS yuborish</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add modal -->
+    <div class="modal fade" id="plusModal" tabindex="-1" aria-labelledby="plusModalLabelledby" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Yangi talaba</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST">
+              {% csrf_token %}
+              <label class="w-100 py-2">Talabani tanlang
+                <select class="w-100 py-2 px-2 mt-2" name="student_add">
+                  <option class="w-100 py-2 border"></option>
+                  {% for i in students %}
+                  <option value="{{ i.id }}">{{ i.name }}</option>
+                  {% endfor %}
+                </select>
+              </label>
+              <button type="submit" class="btn btn-success rounded-pill" data-bs-dismiss="modal" name="student_plus">Yuborish</button>
+            </form>
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-success rounded-pill" data-bs-dismiss="modal" name="student_plus">Yuborish</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- To'lovlar Modal -->
+    <div class="modal fade" id="TolovModal" tabindex="-1" aria-labelledby="plusModalLabelledby" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">To'lovlar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <label class="w-100 py-2">Boshlanish sanasi
+                <div class="mt-2 d-flex">
+                  <input type="date" class="w-100 py-2 border px-3 out">
+                </div>
+              </label>
+              <label class="w-100 py-2">Yakunlanish sanasi
+                <div class="mt-2 d-flex">
+                  <input type="date" class="w-100 py-2 border px-3 out">
+                </div>
+              </label>
+              <div class="w-100 py-2">Javoblardan birini tanlang
+                <label class="mt-2 d-flex fs-7">
+                  <input type="checkbox" class="me-2">
+                  Guruhdagi talabalardan ushbu davrdagi voz kechislarni olib tashlash
+                </label>
+                <label class="mt-2 d-flex fs-7">
+                  <input type="checkbox" class="me-2">
+                  Guruhdagi talabalardan ushbu davr uchun voz kechish
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success rounded-pill" data-bs-dismiss="modal">Yuborish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Muzlash Modal -->
+    <div class="modal fade" id="muzlashModal" tabindex="-1" aria-labelledby="plusModalLabelledby" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Sababini ayting</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST">
+              {% csrf_token %}
+              <select name="student_id" class="form-select shadow-none border-0" style="cursor: pointer;" required id="student_id">
+                <option value="" selected>---------</option>
+                {% for i in object.students.all %}
+                <option value="{{ i.id }}" >{{ i.name }}</option>
+                {% endfor %}
+              
+              </select>
+              <!-- <select class="form-select">
+                <option value=""></option>
+               
+              </select> -->
+              {{ student_deactivate }}
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success rounded-pill" data-bs-dismiss="modal" name="student_deactivate">Yuborish</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- To'lov qo'shish -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightAddTolov" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">To'lov qo'shish</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap" method="POST">
+          {% csrf_token %}
+          {{ payment_form }}
+          <button class="py-2 px-3 my-2 border-0 outline-0 rounded-pill bg-success text-white" type="submit" name="payment">Yuborish</button>
+        </form>
+      </div>
+                        </div>
+
+    <!-- Add Note -->
+    <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="plusModalLabelledby" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Yangi eslatma qo'shing</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <label class="w-100 py-2">Izoh
+                <div class="mt-2 d-flex">
+                  <textarea class="w-100 p-2 overflow-y-scroll"></textarea>        
+                </div>
+              </label>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success rounded-pill" data-bs-dismiss="modal">Saqlash</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Talabani guruhga o'tkazish -->
+  
+{% endblock content %}

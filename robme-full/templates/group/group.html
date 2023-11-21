@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Groups{% endblock title %}
+{% block content %}
+          <!-- Mashini ichiga code yoziladi -->
+          <div class="col-12 col-sm-10 col-lg-11 p-4" style="max-height: 100vh; overflow-y: auto;">
+            <!-- Categories cards -->
+            <div class="d-sm-flex flex-sm-wrap align-items-center justify-content-between pb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="fs-2 mb-3">Guruhlar</span>
+                <p class="fs-6 mb-0 mx-4">Soni - {{ groups.count }}</p>
+              </div>
+              <a class="d-flex justify-content-sm-end justify-content-center my-2 my-sm-0" href="#">
+                <button class="p-2 px-4 text-white bg-success border-0 rounded-pill "  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Yangisini qo'shish</button>
+              </a>
+            </div>
+            <form class="d-flex mt-2 flex-lg-row flex-column">
+              <select class="rounded-1 px-3 py-1 form-select me-lg-1 mb-1" name="teacher">
+                <option selected >Teacher</option>
+                {% for i in teachers %}
+                <option value="{{ i }}">{{ i.name }}</option>
+                {% endfor %}
+              </select>
+              <select class="rounded-1 px-3 py-1 form-select me-lg-1 mb-1" name="days">
+                <option selected >Select Days</option>
+                <option value="{{ 'Toq kunlar' }}">Toq Kunlar</option>
+                <option value="{{ 'Juft kunlar' }}">Juft Kunlar</option>
+              </select>
+              <input type="date" class="rounded-1 px-3 py-1 form-control me-lg-1 mb-1" name="started_date">
+              <input type="date" class="rounded-1 px-3 py-1 form-control mb-1" name="ends_in">
+              <button class="btn btn-success" type="submit" name="filter">filter</button>
+            </form>
+            <div class="table-responsive">
+              <table class="w-100 table table-responsive">
+                <thead>
+                  <tr>
+                    <th class="p-2" colspan="2">Guruh</th>
+                    <th class="p-2">Kurslar</th>
+                    <th class="p-2" colspan="2">O'qituvchi</th>
+                    <th class="p-2" colspan="2">Kunlar</th>
+                    <th class="p-2" colspan="2">Mashg'ulotlar sanalari</th>
+                    <th class="p-2">O'tilgan muddat</th>
+                    <th class="p-2">Xonalar</th>
+                    <th class="p-2">Talabalar</th>
+                    <th class="p-2">Amallar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in groups %}
+                  <tr class="bg-white rounded">
+                    <td class="p-2" colspan="2"><a href="{% url 'groups:group_detail' i.id %}" class="text-dark">{{ i.name }} | {{ i.time }}</a></td>
+                    <td class="p-2">{{ i.name }}</td>
+                    <td class="p-2" colspan="2">{{ i.teacher }}</td>
+                    <td class="p-2" colspan="2">{{ i.days }} {{ i.time }}</td>
+                    <td class="p-2" colspan="2">{{ i.started_date }} {{ i.ends_in }}</td>
+                    <td class="p-2">{{ i.remainded_time }}</td>
+                    <td class="p-2">{{ i.room }}</td>
+                    <td class="p-2">{{ i.students.count }}</td>
+                    <td class="p-2">
+                      <a class="bx bx-dots-vertical-rounded text-success" data-bs-toggle="dropdown" aria-expanded="false" href="#"></a>
+                      <ul class="dropdown-menu py-0">
+                        <li>
+                          <a class="rounded-2 dropdown-item text-secondary d-flex justify-content-start align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightTahrir" aria-controls="offcanvasRightTahrir" href="#">
+                            <i class="bx bx-edit"></i>Tahrirlash
+                          </a>
+                        </li>
+                        <li>
+                          <a class="rounded-2 dropdown-item text-success d-flex justify-content-start align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightsms" aria-controls="offcanvasRight" href="#">
+                            <i class="bx bx-envelope"></i>SMS 
+                          </a>
+                        </li>
+                        <li>
+                          <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="text" class="d-none" name="gr" value="{{i.id}}">
+                            <button class="rounded-2 dropdown-item text-danger d-flex justify-content-start align-items-center" type="submit" name="delete">
+                              <i class="bx bx-trash"></i>O'chirish
+                            </button>
+                          </form>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+           
+
+  
+    <!-- Add group -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">O'qituvchini tahrirlash</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap" method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <button class="py-2 px-3 my-2 border-0 outline-0 rounded-pill bg-success text-white" name="create">Yuborish</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add SMS -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightsms" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">O'qituvchiga SMS yuboring</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap">
+          <label class="w-100 py-2">
+            <div class="mt-2 d-flex">
+              <input type="text" class="w-100 p-2">             
+            </div>
+          </label>
+    
+          <div class="my-2 w-100 d-flex justify-content-between">
+            <p>0 ta beldi (~ 1 SMS )</p>
+            <p>Shoxruhbek 2</p>
+          </div>
+          <button class="py-2 px-3 my-2 border-0 outline-0 rounded-pill bg-success text-white">SMS yuborish</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tahrirlash -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightTahrir" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="modal-title m-0" id="staticBackdropLabel">Guruhni tahrirlash</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex align-items-center flex-wrap" method="POST">
+          {% csrf_token %}
+          <select name="group" id="group_id" class="form-select my-1">
+            <option selected >Select Group</option>
+            {% for i in groups %}
+            <option value="{{ i.id }}">{{ i.name }}</option>
+            {% endfor %}
+          </select>
+          {{ group_update }}
+          <button class="py-2 px-3 my-2 border-0 outline-0 rounded-pill bg-success text-white" name="group_update">Yuborish</button>
+        </form>
+      </div>
+    </div> 
+{% endblock content %}

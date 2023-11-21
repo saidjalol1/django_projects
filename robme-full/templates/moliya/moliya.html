@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}Moliya-Barcha To'lovlar{% endblock title %}
+{% block content %}
+          <div class="p-3 px-4 col-sm-10 col-lg-11 overflow-y-auto" style="max-height: 89vh;">
+              <h2>Barcha to'lovlar</h2>
+              <div class="row">
+                
+                  <div class="col-12 col-lg-6">
+                    {% for i in payments %}
+                    <div class=" my-3 bg-body shadow rounded">
+                      <div class="px-3 py-4 d-flex align-items-center justify-content-between border-start border-5 border-info">
+                        <h6>To'lovlar miqdori: {{ i.sum }} so'm {{ i.month|date:"F Y" }}</h6>
+                        <i class="bx bx-coin-stack fs-3 text-info"></i>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                <div class="col-12 col-lg-6 my-3 bg-body shadow rounded">
+                  <canvas id="myChart" class="p-2 w-100"></canvas>
+                </div>
+
+              </div>
+ 
+              <form class="my-3 d-flex align-items-center flex-column flex-xl-row" method="GET">
+                {% csrf_token %}
+                <div class="w-100 mx-1">
+                  Sana boshlab
+                  <input class="form-control m-1" type="date" name="by_date">
+                </div>
+                <div class="w-100 mx-1">
+                  Ism Bo'yicha
+                  <input class="form-control m-1" type="text" placeholder="Ism yoki telefon orqarish" name="by_name">
+                </div>
+                <div class="w-100 mx-1">
+                  Telefon Bo'yicha
+                  <input class="form-control m-1" type="text" placeholder="Ism yoki telefon orqarish" name="by_phone">
+                </div>
+                <div class="w-100 mx-1">          
+                    O'qituvchi
+                  <select class="form-select m-1" aria-label="Default select example" name="by_teacher">
+                    <option selected>Open this select menu</option>
+                    {% for i in teachers %}
+                    <option value="{{ i.id }}">{{ i.name }} {{ i.surname }}</option>
+                    {% endfor %}
+                  </select>
+                </div>   
+                
+                <div class="w-100 mx-1">
+                  <button class="btn mt-4 bg-success text-white" name="filter">Filter</button>                  
+                </div>
+              </form>
+
+              
+              <div class="table-responsive">
+                <table class="table overflow-x-auto bg-body shadow" style="min-width: 1200px;">
+                    <tr class="">
+                      <th class=""></th>
+                      <th class=" px-3 py-3">Sana</th>
+                      <th class=" px-3 py-3" >Talaba ismi</th>
+                      <th class=" px-3 py-3">So'm</th>
+                      <th class=" px-3 py-3" >To'lov turi</th>
+                      <th class=" px-3 py-3" >O'qituvchi</th>
+                    </tr>
+                    {% for i in all_payments %}
+                    <tr class="">
+                      <td class="py-3 rounded">{{ i.id }}</td>
+                      <td class="py-3 rounded">{{ i.date_added }}</td>
+                      <td class="p-3">
+                        <a class="text-black" href="#">{{ i.student.name }} {{ i.student.surname }}</a>
+                      </td>
+                      <td class="p-3">{{ i.amount }}UZS</td>
+                      <td class="p-3">Cash</td>
+                      <td class="p-3">{{ i.course.teacher.name }} {{ i.course.teachers.surname }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+              </div>
+
+          </div>
+{% endblock content %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<script>
+const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 6, max:16}}],
+    }
+  }
+});
+</script>
+{% endblock scripts %}

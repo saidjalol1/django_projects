@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100vh;">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"	rel="stylesheet"/>
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/utilits.css">
+    <style>
+      body::-webkit-scrollbar {
+        width: 4px;
+      }
+      body::-webkit-scrollbar-thumb {
+        background: #4e8c28;
+      }
+      a {
+        text-decoration: none;
+      }
+      .side-navbar a {
+        color: black;
+      }
+      .side-navbar a:hover{
+        background-color: #44ff0024;
+        cursor: pointer;
+      }
+      .categories-box a {
+        background-color: white;
+      }
+      .categories-box a:hover{
+        background-color: #44ff0024;
+      }
+      .active-navbar {
+        background-color: #44ff0024;
+      }
+    </style>
+		<title>Robme</title>
+	</head>
+	<body class="bg-light h-100" style="display: flex; justify-content: space-between; align-items: center; flex-direction: column;">
+    <!-- Header start -->
+		<header class="shadow-sm py-2 bg-white position-sticky top-0 w-100 z-3">
+			<div class="container-fluid">
+				<div class="d-flex justify-content-between align-items-center flex-wrap">
+					<div class="logo-box d-flex align-items-center">
+						<a href="../index.html">
+							<img src="../img/logo.png" alt="Site img" width="60" />
+						</a>
+            <div class="dropdown">
+              <a class="bx bx-plus-circle fs-3 ms-4 text-decoration-none text-success" href="#" data-bs-toggle="dropdown" aria-expanded="false"></a>
+              <ul class="dropdown-menu py-0 shadow">
+                <li><a class="dropdown-item text-black-50 d-flex align-items-center rounded-2 p-2" href="#" data-bs-toggle="offcanvas" data-bs-target="#addStudentModal" aria-controls="offcanvasRight"><i class="bx bx-plus-circle fs-5 me-1"></i><span>Yangi talaba</span></a></li>
+                <li><a class="dropdown-item text-black-50 d-flex align-items-center rounded-2 p-2" href="#" data-bs-toggle="offcanvas" data-bs-target="#addPaymentModal" aria-controls="offcanvasRight"><i class='bx bx-dollar-circle fs-5 me-1'></i><span>To'lov</span></a></li>
+              </ul>
+            </div>
+					</div>
+					<form class="d-flex align-items-center rounded-pill border border-2 order-sm-0 order-1 mx-sm-0 mx-auto my-2" method="get">
+						<input class="form-control rounded-pill border-0 " type="search" placeholder="Qidiruv" required />
+						<button class="bg-transparent border-0"><i class="bx bx-search"></i></button>
+					</form>
+
+          <div class="d-flex justify-content-between align-items-center py-2">
+            <a class='bx bx-bell bx-tada fs-4 text-decoration-none ms-3 text-success' href=""></a>
+            <a class="text-decoration-none ms-3 text-success fw-bold" href="#">
+              <span>Zokirjonov Farrux</span>
+              <img src="" alt="" width="30">
+            </a>
+          </div>
+				</div>
+			</div>
+		</header>
+    <!-- Header end -->
+    
+    <!-- Main start -->
+    <main class="w-100 h-100 flex-grow-1">
+      <div class="container-fluid h-100">
+        <div class="row h-100">
+          <div class="col-12 col-sm-2 col-lg-1 d-flex justify-content-around justify-content-sm-start flex-wrap flex-sm-column bg-white p-0 side-navbar shadow">
+            <a class="p-3 py-sm-4 d-flex flex-column align-items-center justify-content-center" href="../lidlar.html">
+              <img src="../img/icons/download-icon.svg" alt="download icon" width="24">
+              <span class="fs-6">Lidlar</span>
+            </a>
+            <a class="p-3 py-sm-4 d-flex flex-column align-items-center justify-content-center" href="../teachers.html">
+              <img src="../img/icons/user-icon.svg" alt="user icon" width="24">
+              <span class="fs-6">O'qituvchilar</span>
+            </a>
+            <a class="p-3 py-sm-4 d-flex flex-column align-items-center justify-content-center active-navbar" href="../group/group.html">
+              <img src="../img/icons/layers-icon.svg" alt="layer icon" width="24">
+              <span class="fs-6">Guruxlar</span>
+            </a>
+            <a class="p-3 py-sm-4 d-flex flex-column align-items-center justify-content-center" href="../students.html">
+              <img src="../img/icons/users-icon.svg" alt="users icon" width="24">
+              <span class="fs-6">Talabalar</span>
+            </a>
+
+            <div class="dropend">
+              <a class="p-3 py-sm-4 d-flex flex-column align-items-center justify-content-center" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../img/icons/dollar-icon.svg" alt="users icon" width="24">
+                <span class="fs-6">To'lov</span>
+              </a>
+              <ul class="dropdown-menu shadow-lg">
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../moliya/moliya.html">
+                    <i class="bx bx-coin-stack"></i>
+                    <span>Barcha to'lovlar</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../moliya/moliya_2.html">
+                    <i class="bx bx-coin-stack"></i>
+                    <span>Yechib olish</span>  
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../moliya/moliya_3.html">
+                    <i class="bx bx-pie-chart-alt-2"></i>
+                    <span>Xarajatlar</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../moliya/moliya_4.html">
+                    <i class="bx bx-food-menu"></i>
+                    <span>Ish haqi</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../moliya/moliya_5.html">
+                    <i class="bx bx-error"></i>
+                    <span>Qarzdorlar</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="dropend">
+              <a class="p-3 py-sm-4 d-flex flex-column align-items-center justify-content-center" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../img/icons/bussines-icon.svg" alt="bussines icon" width="24">
+                <span class="fs-6">Hisobotlar</span>
+              </a>
+              <ul class="dropdown-menu shadow-lg">
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_1.html">
+                    <i class="bx bx-user"></i>
+                    <span>Talabalar holati</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_2.html">
+                    <i class="bx bx-layer-plus"></i>
+                    <span>O'qituvchining samaradorligi</span>  
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_3.html">
+                    <i class="bx bx-layer-plus"></i>
+                    <span>Kurs smaradorligi</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_4.html">
+                    <i class="bx bx-group"></i>
+                    <span>Konversiya hisobotlari</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_5.html">
+                    <i class="bx bx-group"></i>
+                    <span>Darsga kelish hisobotlari</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_6.html">
+                    <i class="bx bx-group"></i>
+                    <span>Darsga kelish hisobotlari</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_7.html">
+                    <i class="bx bx-mobile"></i>
+                    <span>Darsga kelish hisobotlari</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_8.html">
+                    <i class="bx bx-mobile"></i>
+                    <span>Darsga kelish hisobotlari</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_9.html">
+                    <i class="bx bx-list-ul"></i>
+                    <span>Darsga kelish hisobotlari</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="dropend">
+              <a class="p-3 py-sm-4 d-flex flex-column align-items-center justify-content-center" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../img/icons/setting-icon.svg" alt="settings icon" width="24">
+                <span class="fs-6">Sozlamalar</span>
+              </a>
+              <ul class="dropdown-menu shadow-lg">
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../settings/sms-sozlamalari.html">
+                    <i class="bx bx-message-dots"></i>
+                    <span>SMS sozlamalari</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../settings/onlain-telefoinya.html">
+                    <i class="bx bx-headphone"></i>
+                    <span>Online telefoniya</span>  
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../settings/kurslar.html">
+                    <i class="bx bx-layer-plus"></i>
+                    <span>Kurslar</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../settings/xonalar.html">
+                    <i class="bx bx-grid-alt"></i>
+                    <span>Xonalar</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../settings/dam-olish.html">
+                    <i class="bx bx-calendar"></i>
+                    <span>Dam olish kunlari</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../settings/arxiv.html">
+                    <i class="bx bx-folder"></i>
+                    <span>Arxiv</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../settings/guruhni-tarketgan.html">
+                    <i class="bx bx-user-plus"></i>
+                    <span>Guruxni tark etgan o'quvchilar</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_8.html">
+                    <i class="bx bx-mobile"></i>
+                    <span>Darsga kelish hisobotlari</span>
+                  </a>
+                </li>
+                <li class="dropdown-item my-1">
+                  <a class="p-2" href="../hisobot/hisobotlar_9.html">
+                    <i class="bx bx-list-ul"></i>
+                    <span>Darsga kelish hisobotlari</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Mashini ichiga code yoziladi -->
+          <div class="col-12 col-sm-10 col-lg-11 p-4" style="max-height: 100vh; overflow-y: auto;">
+            <!-- Categories cards -->
+            <a href="./group-detail.html" class="fs-6 fw-medium text-secondary">
+              <i class="bx bx-chevron-left"></i>
+              <span>Arab tili</span>
+            </a>  
+            <br>
+            <span class="fs-2 fw-medium text-secondary">Sarlavhani</span>
+            <div>
+              <div class="d-flex justify-content-between my-3">
+                <span class="fs-5 fw-semibold text-secondary">Sarlavhani</span>
+                <i class="bx bx-paper-plane items p-2 rounded-pill transition"></i>
+              </div>
+              <div class="ms-2 p-4 w-100 bg-white shadow-sm d-flex justify-content-start align-items-center">
+                <i class="plus bx bx-plus-circle cursor fs-4"></i>
+                <input type="text" placeholder="Sizga dars mazmunini qo'shing" class="border-0 fs-6 w-100 p-2">
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <button class="border border-danger text-danger bg-white rounded-pill p-2 px-3 mt-3">Vazifa yaratish +</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Main end -->
+
+
+    <!-- Add student modal -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="addStudentModal" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Yangi talaba qo'shish</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <form class="w-100">
+              <label class="w-100 my-2">
+                Telefon:
+                <input class="form-control my-2" type="tel" placeholder="+998 97 976 76 88" required>
+              </label>
+              <label class="w-100 my-2">
+                Ism:
+                <input class="form-control my-2" type="text" required>
+              </label>
+              <label class="w-100 my-2">
+                Tug'ilgan sana:
+                <input class="form-control my-2" type="date" required>
+              </label>
+              <div>
+                Jinsi:
+                <span class="d-flex align-items-center my-1">
+                  <input class="mt-1 me-1" type="radio" name="jins" id="male">
+                  <label for="male">erkak</label>
+                </span>
+                <span class="d-flex align-items-center my-1">
+                  <input class="mt-1 me-1" type="radio" name="jins" id="female">
+                  <label for="female">ayol</label>
+                </span>
+              </div>
+              <label class="w-100 my-2">
+                Izoh:
+                <textarea class="form-control my-2" cols="30" rows="3"></textarea>
+              </label>
+              <button class="btn btn-success rounded-pill">Yuborish</button>
+            </form>
+          </div>
+    </div>
+    
+    <!-- Add payment modal -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="addPaymentModal" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">To'lov qo'shish</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <form>
+              <label class="w-100 my-2">Talaba:
+                <input class="form-control my-1" type="text" required>
+              </label>
+              <div>
+                To'lov usuli:
+                <div class="row">
+                  <label class="col-6 my-1">
+                    <input class="" type="radio" name="payment-type" required>
+                    Naqd pul
+                  </label>
+                  <label class="col-6 my-1">
+                    <input class="" type="radio" name="payment-type" required>
+                    Payme
+                  </label>
+                  <label class="col-6 my-1">
+                    <input class="" type="radio" name="payment-type" required>
+                    Plastic kartasi
+                  </label>
+                  <label class="col-6 my-1">
+                    <input class="" type="radio" name="payment-type" required>
+                    Click
+                  </label>
+                  <label class="col-6 my-1">
+                    <input class="" type="radio" name="payment-type" required>
+                    Bank hisobi
+                  </label>
+                  <label class="col-6 my-1">
+                    <input class="" type="radio" name="payment-type" required>
+                    Apelsin
+                  </label>
+                </div>
+              </div>
+              <label class="w-100 my-2">
+                Miqdor:
+                <input class="form-control my-1" type="number" required>
+              </label>
+              <label class="w-100 my-2">
+                Sana:
+                <input class="form-control my-1" type="date" required>
+              </label>
+              <label class="w-100 my-2">
+                Izoh:
+                <textarea class="form-control my-1" rows="3"></textarea>
+              </label>
+              <button class="btn btn-success rounded-pill" type="submit">Yuborish</button>
+            </form>
+          </div>
+    </div>
+    <!-- Scripts -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
