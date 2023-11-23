@@ -12,6 +12,7 @@
 	<link href="{% static 'vendor/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    {% block style %}{% endblock style %}
 </head>
 <body>
        <!--*******************
@@ -78,81 +79,7 @@
 									<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#045ffb}</style><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
 									<div class="pulse-css"></div>
                                 </a>
-                                <div class="dropdown-menu rounded dropdown-menu-right">
-                                    <div id="DZ_W_Notification1" class="widget-media dz-scroll p-3 height380">
-										<ul class="timeline">
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2">
-														<img alt="image" width="50" src="{% static 'images/avatar/1.jpg' %}">
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Dr sultads Send you Photo</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2 media-info">
-														KG
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Resport created successfully</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2 media-success">
-														<i class="fa fa-home"></i>
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Reminder : Treatment Time!</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											 <li>
-												<div class="timeline-panel">
-													<div class="media mr-2">
-														<img alt="image" width="50" src="{% static 'images/avatar/1.jpg' %}">
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Dr sultads Send you Photo</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2 media-danger">
-														KG
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Resport created successfully</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2 media-primary">
-														<i class="fa fa-home"></i>
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Reminder : Treatment Time!</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-										</ul>
-									</div>
-                                    <a class="all-notification" href="javascript:void(0)">See all notifications <i class="ti-arrow-right"></i></a>
-                                </div>
-                            </li>
-							
+                            </li>			
                         </ul>
                     </div>
                 </nav>
@@ -175,10 +102,20 @@
 							<li><a href="index.html">Dashboard</a></li>
 							<li><a href="ecom-product-grid.html">Barcha Tovarlar</a></li>
 							<li><a href="ecom-product-order.html">Buyurtmalar</a></li>
-							<li><a href="ecom-customers.html">Klientlar</a></li>
+							<li><a href="{% url 'main:customers' %}">Klientlar</a></li>
 							<li><a href="ombor.html">Ombor</a></li>
 						</ul>
                     </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-television"></i>
+                        <span class="nav-text">Menu</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./app-profile.html">Profile</a></li>
+                        <li><a  href="javascript:void()" aria-expanded="false">Barcha Tovarlar</a></li>
+                        <li><a href="./app-calender.html">Calendar</a></li>
+                    </ul>
+                </li>
                   
                 </ul>
 				<div class="add-menu-sidebar">
@@ -225,7 +162,7 @@
     <script src="{% static 'js/custom.min.js' %}"></script>
 	<script src="{% static 'js/deznav-init.js' %}"></script>
     <script src="{% static 'vendor/highlightjs/highlight.pack.min.js' %}"></script>
-    <script src="{% static 'vendor/owl-carousel/owl.carousel.js' %}"></script>
+    <script src="{% static '/vendor/owl-carousel/owl.carousel.js' %}"></script>
     <!-- Circle progress -->    
     {% block scripts %} {% endblock scripts %}
 </body>
