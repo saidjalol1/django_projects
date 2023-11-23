@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Gymove - Fitness Bootstrap Admin Dashboard</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+	<link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+    <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="./vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <a href="index.html" class="brand-logo">
+                <!-- <img class="logo-abbr" src="./images/logo.png" alt=""> -->
+                <!-- <img class="logo-compact" src="./icons/logo.png" alt=""> -->
+                <img class="brand-title" src="./icons/logo.png" alt="">
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box start
+        ***********************************-->
+		<!-- <div class="chatbox">
+			<div class="chatbox-close"></div>
+			<div class="custom-tab-1">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#notes">Notes</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#alerts">Alerts</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#chat">Chat</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade active show" id="chat" role="tabpanel">
+						<div class="card mb-sm-3 mb-md-0 contacts_card dz-chat-user-box">
+							<div class="card-header chat-list-header text-center">
+								<a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/></g></svg></a>
+								<div>
+									<h6 class="mb-1">Chat List</h6>
+									<p class="mb-0">Show All</p>
+								</div>
+								<a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
+							</div>
+							<div class="card-body contacts_body p-0 dz-scroll  " id="DZ_W_Contacts_Body">
+								<ul class="contacts">
+									<li class="name-first-letter">A</li>
+									<li class="active dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Archie Parker</span>
+												<p>Kalid is online</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Alfie Mason</span>
+												<p>Taherah left 7 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>AharlieKane</span>
+												<p>Sami is online</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Athan Jacoby</span>
+												<p>Nargis left 30 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="name-first-letter">B</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Bashid Samim</span>
+												<p>Rashid left 50 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Breddie Ronan</span>
+												<p>Kalid is online</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Ceorge Carson</span>
+												<p>Taherah left 7 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="name-first-letter">D</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Darry Parker</span>
+												<p>Sami is online</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Denry Hunter</span>
+												<p>Nargis left 30 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="name-first-letter">J</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Jack Ronan</span>
+												<p>Rashid left 50 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Jacob Tucker</span>
+												<p>Kalid is online</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>James Logan</span>
+												<p>Taherah left 7 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Joshua Weston</span>
+												<p>Sami is online</p>
+											</div>
+										</div>
+									</li>
+									<li class="name-first-letter">O</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Oliver Acker</span>
+												<p>Nargis left 30 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="dz-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Oscar Weston</span>
+												<p>Rashid left 50 mins ago</p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="card chat dz-chat-history-box d-none">
+							<div class="card-header chat-list-header text-center">
+								<a href="javascript:void(0)" class="dz-chat-history-back">
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon points="0 0 24 0 24 24 0 24"/><rect fill="#000000" opacity="0.3" transform="translate(15.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-15.000000, -12.000000) " x="14" y="7" width="2" height="10" rx="1"/><path d="M3.7071045,15.7071045 C3.3165802,16.0976288 2.68341522,16.0976288 2.29289093,15.7071045 C1.90236664,15.3165802 1.90236664,14.6834152 2.29289093,14.2928909 L8.29289093,8.29289093 C8.67146987,7.914312 9.28105631,7.90106637 9.67572234,8.26284357 L15.6757223,13.7628436 C16.0828413,14.136036 16.1103443,14.7686034 15.7371519,15.1757223 C15.3639594,15.5828413 14.7313921,15.6103443 14.3242731,15.2371519 L9.03007346,10.3841355 L3.7071045,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(9.000001, 11.999997) scale(-1, -1) rotate(90.000000) translate(-9.000001, -11.999997) "/></g></svg>
+								</a>
+								<div>
+									<h6 class="mb-1">Chat with Khelesh</h6>
+									<p class="mb-0 text-success">Online</p>
+								</div>							
+								<div class="dropdown">
+									<a href="javascript:void(0)" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
+									<ul class="dropdown-menu dropdown-menu-right">
+										<li class="dropdown-item"><i class="fa fa-user-circle text-primary mr-2"></i> View profile</li>
+										<li class="dropdown-item"><i class="fa fa-users text-primary mr-2"></i> Add to close friends</li>
+										<li class="dropdown-item"><i class="fa fa-plus text-primary mr-2"></i> Add to group</li>
+										<li class="dropdown-item"><i class="fa fa-ban text-primary mr-2"></i> Block</li>
+									</ul>
+								</div>
+							</div>
+							<div class="card-body msg_card_body dz-scroll" id="DZ_W_Contacts_Body3">
+								<div class="d-flex justify-content-start mb-4">
+									<div class="img_cont_msg">
+										<img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+									<div class="msg_cotainer">
+										Hi, how are you samim?
+										<span class="msg_time">8:40 AM, Today</span>
+									</div>
+								</div>
+								<div class="d-flex justify-content-end mb-4">
+									<div class="msg_cotainer_send">
+										Hi Khalid i am good tnx how about you?
+										<span class="msg_time_send">8:55 AM, Today</span>
+									</div>
+									<div class="img_cont_msg">
+								<img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+								</div>
+								<div class="d-flex justify-content-start mb-4">
+									<div class="img_cont_msg">
+										<img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+									<div class="msg_cotainer">
+										I am good too, thank you for your chat template
+										<span class="msg_time">9:00 AM, Today</span>
+									</div>
+								</div>
+								<div class="d-flex justify-content-end mb-4">
+									<div class="msg_cotainer_send">
+										You are welcome
+										<span class="msg_time_send">9:05 AM, Today</span>
+									</div>
+									<div class="img_cont_msg">
+								<img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+								</div>
+								<div class="d-flex justify-content-start mb-4">
+									<div class="img_cont_msg">
+										<img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+									<div class="msg_cotainer">
+										I am looking for your next templates
+										<span class="msg_time">9:07 AM, Today</span>
+									</div>
+								</div>
+								<div class="d-flex justify-content-end mb-4">
+									<div class="msg_cotainer_send">
+										Ok, thank you have a good day
+										<span class="msg_time_send">9:10 AM, Today</span>
+									</div>
+									<div class="img_cont_msg">
+										<img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+								</div>
+								<div class="d-flex justify-content-start mb-4">
+									<div class="img_cont_msg">
+										<img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+									<div class="msg_cotainer">
+										Bye, see you
+										<span class="msg_time">9:12 AM, Today</span>
+									</div>
+								</div>
+								<div class="d-flex justify-content-start mb-4">
+									<div class="img_cont_msg">
+										<img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+									<div class="msg_cotainer">
+										Hi, how are you samim?
+										<span class="msg_time">8:40 AM, Today</span>
+									</div>
+								</div>
+								<div class="d-flex justify-content-end mb-4">
+									<div class="msg_cotainer_send">
+										Hi Khalid i am good tnx how about you?
+										<span class="msg_time_send">8:55 AM, Today</span>
+									</div>
+									<div class="img_cont_msg">
+								<img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+								</div>
+								<div class="d-flex justify-content-start mb-4">
+									<div class="img_cont_msg">
+										<img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+									<div class="msg_cotainer">
+										I am good too, thank you for your chat template
+										<span class="msg_time">9:00 AM, Today</span>
+									</div>
+								</div>
+								<div class="d-flex justify-content-end mb-4">
+									<div class="msg_cotainer_send">
+										You are welcome
+										<span class="msg_time_send">9:05 AM, Today</span>
+									</div>
+									<div class="img_cont_msg">
+								<img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+								</div>
+								<div class="d-flex justify-content-start mb-4">
+									<div class="img_cont_msg">
+										<img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+									<div class="msg_cotainer">
+										I am looking for your next templates
+										<span class="msg_time">9:07 AM, Today</span>
+									</div>
+								</div>
+								<div class="d-flex justify-content-end mb-4">
+									<div class="msg_cotainer_send">
+										Ok, thank you have a good day
+										<span class="msg_time_send">9:10 AM, Today</span>
+									</div>
+									<div class="img_cont_msg">
+										<img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+								</div>
+								<div class="d-flex justify-content-start mb-4">
+									<div class="img_cont_msg">
+										<img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+									</div>
+									<div class="msg_cotainer">
+										Bye, see you
+										<span class="msg_time">9:12 AM, Today</span>
+									</div>
+								</div>
+							</div>
+							<div class="card-footer type_msg">
+								<div class="input-group">
+									<textarea class="form-control" placeholder="Type your message..."></textarea>
+									<div class="input-group-append">
+										<button type="button" class="btn btn-primary"><i class="fa fa-location-arrow"></i></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="alerts" role="tabpanel">
+						<div class="card mb-sm-3 mb-md-0 contacts_card">
+							<div class="card-header chat-list-header text-center">
+								<a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
+								<div>
+									<h6 class="mb-1">Notications</h6>
+									<p class="mb-0">Show All</p>
+								</div>
+								<a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/><path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/></g></svg></a>
+							</div>
+							<div class="card-body contacts_body p-0 dz-scroll" id="DZ_W_Contacts_Body1">
+								<ul class="contacts">
+									<li class="name-first-letter">SEVER STATUS</li>
+									<li class="active">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont primary">KK</div>
+											<div class="user_info">
+												<span>David Nester Birthday</span>
+												<p class="text-primary">Today</p>
+											</div>
+										</div>
+									</li>
+									<li class="name-first-letter">SOCIAL</li>
+									<li>
+										<div class="d-flex bd-highlight">
+											<div class="img_cont success">RU<i class="icon fa-birthday-cake"></i></div>
+											<div class="user_info">
+												<span>Perfection Simplified</span>
+												<p>Jame Smith commented on your status</p>
+											</div>
+										</div>
+									</li>
+									<li class="name-first-letter">SEVER STATUS</li>
+									<li>
+										<div class="d-flex bd-highlight">
+											<div class="img_cont primary">AU<i class="icon fa fa-user-plus"></i></div>
+											<div class="user_info">
+												<span>AharlieKane</span>
+												<p>Sami is online</p>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="d-flex bd-highlight">
+											<div class="img_cont info">MO<i class="icon fa fa-user-plus"></i></div>
+											<div class="user_info">
+												<span>Athan Jacoby</span>
+												<p>Nargis left 30 mins ago</p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="card-footer"></div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="notes">
+						<div class="card mb-sm-3 mb-md-0 note_card">
+							<div class="card-header chat-list-header text-center">
+								<a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/></g></svg></a>
+								<div>
+									<h6 class="mb-1">Notes</h6>
+									<p class="mb-0">Add New Nots</p>
+								</div>
+								<a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/><path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/></g></svg></a>
+							</div>
+							<div class="card-body contacts_body p-0 dz-scroll" id="DZ_W_Contacts_Body2">
+								<ul class="contacts">
+									<li class="active">
+										<div class="d-flex bd-highlight">
+											<div class="user_info">
+												<span>New order placed..</span>
+												<p>10 Aug 2020</p>
+											</div>
+											<div class="ml-auto">
+												<a href="javascript:void(0)" class="btn btn-primary btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+												<a href="javascript:void(0)" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="d-flex bd-highlight">
+											<div class="user_info">
+												<span>Youtube, a video-sharing website..</span>
+												<p>10 Aug 2020</p>
+											</div>
+											<div class="ml-auto">
+												<a href="javascript:void(0)" class="btn btn-primary btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+												<a href="javascript:void(0)" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="d-flex bd-highlight">
+											<div class="user_info">
+												<span>john just buy your product..</span>
+												<p>10 Aug 2020</p>
+											</div>
+											<div class="ml-auto">
+												<a href="javascript:void(0)" class="btn btn-primary btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+												<a href="javascript:void(0)" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="d-flex bd-highlight">
+											<div class="user_info">
+												<span>Athan Jacoby</span>
+												<p>10 Aug 2020</p>
+											</div>
+											<div class="ml-auto">
+												<a href="javascript:void(0)" class="btn btn-primary btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+												<a href="javascript:void(0)" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!--**********************************
+            Chat box End
+        ***********************************-->
+		
+		<!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">
+								Dashboard
+                            </div>
+                        </div>
+                        <ul class="navbar-nav header-right">
+							<li class="nav-item">
+								<div class="input-group search-area d-xl-inline-flex d-none">
+									<div class="input-group-append">
+										<span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+									</div>
+									<input type="text" class="form-control" placeholder="Search here...">
+								</div>
+							</li>
+							<li class="nav-item dropdown notification_dropdown">
+                                <a class="nav-link  ai-icon" href="javascript:void(0)" role="button" data-toggle="dropdown">
+									<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#045ffb}</style><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+									<div class="pulse-css"></div>
+                                </a>
+                                <div class="dropdown-menu rounded dropdown-menu-right">
+                                    <div id="DZ_W_Notification1" class="widget-media dz-scroll p-3 height380">
+										<ul class="timeline">
+											<li>
+												<div class="timeline-panel">
+													<div class="media mr-2">
+														<img alt="image" width="50" src="images/avatar/1.jpg">
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Dr sultads Send you Photo</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media mr-2 media-info">
+														KG
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Resport created successfully</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media mr-2 media-success">
+														<i class="fa fa-home"></i>
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Reminder : Treatment Time!</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											 <li>
+												<div class="timeline-panel">
+													<div class="media mr-2">
+														<img alt="image" width="50" src="images/avatar/1.jpg">
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Dr sultads Send you Photo</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media mr-2 media-danger">
+														KG
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Resport created successfully</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media mr-2 media-primary">
+														<i class="fa fa-home"></i>
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Reminder : Treatment Time!</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+                                    <a class="all-notification" href="javascript:void(0)">See all notifications <i class="ti-arrow-right"></i></a>
+                                </div>
+                            </li>
+							
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="deznav">
+            <div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+                        <ul aria-expanded="false">
+							<li><a href="index.html">Dashboard</a></li>
+							<li><a href="ecom-product-grid.html">Barcha Tovarlar</a></li>
+							<li><a href="ecom-product-order.html">Buyurtmalar</a></li>
+							<li><a href="ecom-customers.html">Klientlar</a></li>
+							<li><a href="ombor.html">Ombor</a></li>
+						</ul>
+                    </li>
+                    <!-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-television"></i>
+							<span class="nav-text">Apps</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="./app-profile.html">Profile</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./email-compose.html">Compose</a></li>
+                                    <li><a href="./email-inbox.html">Inbox</a></li>
+                                    <li><a href="./email-read.html">Read</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./app-calender.html">Calendar</a></li>
+							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./ecom-product-grid.html">Product Grid</a></li>
+									<li><a href="./ecom-product-list.html">Product List</a></li>
+									<li><a href="./ecom-product-detail.html">Product Details</a></li>
+									<li><a href="./ecom-product-order.html">Order</a></li>
+									<li><a href="./ecom-checkout.html">Checkout</a></li>
+									<li><a href="./ecom-invoice.html">Invoice</a></li>
+									<li><a href="./ecom-customers.html">Customers</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-controls-3"></i>
+							<span class="nav-text">Charts</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="./chart-flot.html">Flot</a></li>
+                            <li><a href="./chart-morris.html">Morris</a></li>
+                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
+                            <li><a href="./chart-chartist.html">Chartist</a></li>
+                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
+                            <li><a href="./chart-peity.html">Peity</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-internet"></i>
+							<span class="nav-text">Bootstrap</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="./ui-accordion.html">Accordion</a></li>
+                            <li><a href="./ui-alert.html">Alert</a></li>
+                            <li><a href="./ui-badge.html">Badge</a></li>
+                            <li><a href="./ui-button.html">Button</a></li>
+                            <li><a href="./ui-modal.html">Modal</a></li>
+                            <li><a href="./ui-button-group.html">Button Group</a></li>
+                            <li><a href="./ui-list-group.html">List Group</a></li>
+                            <li><a href="./ui-media-object.html">Media Object</a></li>
+                            <li><a href="./ui-card.html">Cards</a></li>
+                            <li><a href="./ui-carousel.html">Carousel</a></li>
+                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
+                            <li><a href="./ui-popover.html">Popover</a></li>
+                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
+                            <li><a href="./ui-tab.html">Tab</a></li>
+                            <li><a href="./ui-typography.html">Typography</a></li>
+                            <li><a href="./ui-pagination.html">Pagination</a></li>
+                            <li><a href="./ui-grid.html">Grid</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-heart"></i>
+							<span class="nav-text">Plugins</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="./uc-select2.html">Select 2</a></li>
+                            <li><a href="./uc-nestable.html">Nestedable</a></li>
+                            <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
+                            <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
+                            <li><a href="./uc-toastr.html">Toastr</a></li>
+                            <li><a href="./map-jqvmap.html">Jqv Map</a></li>
+                            <li><a href="./uc-lightgallery.html">Lightgallery</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+							<i class="flaticon-381-settings-2"></i>
+							<span class="nav-text">Widget</span>
+						</a>
+					</li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-notepad"></i>
+							<span class="nav-text">Forms</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="./form-element.html">Form Elements</a></li>
+                            <li><a href="./form-wizard.html">Wizard</a></li>
+                            <li><a href="./form-editor-summernote.html">Summernote</a></li>
+                            <li><a href="form-pickers.html">Pickers</a></li>
+                            <li><a href="form-validation-jquery.html">Jquery Validate</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-network"></i>
+							<span class="nav-text">Table</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
+                            <li><a href="table-datatable-basic.html">Datatable</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Pages</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="./page-register.html">Register</a></li>
+                            <li><a href="./page-login.html">Login</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./page-error-400.html">Error 400</a></li>
+                                    <li><a href="./page-error-403.html">Error 403</a></li>
+                                    <li><a href="./page-error-404.html">Error 404</a></li>
+                                    <li><a href="./page-error-500.html">Error 500</a></li>
+                                    <li><a href="./page-error-503.html">Error 503</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./page-lock-screen.html">Lock Screen</a></li>
+                        </ul>
+                    </li> -->
+                </ul>
+				<div class="add-menu-sidebar">
+					<img src="images/calendar.png" alt="" class="mr-3">
+					<p class="	font-w500 mb-0">Create Workout Plan Now</p>
+				</div>
+				<div class="copyright">
+					<p><strong>Gymove Fitness Admin Dashboard</strong> © 2020 All Rights Reserved</p>
+					<p>Made with <span class="heart"></span> by DexignZone</p>
+				</div>
+			</div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+		
+		<!--**********************************
+            Content body start
+        ***********************************-->
+
+
+        <section class="h-100" style="background-color: #eee;">
+            <div class="content-body">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-10">
+          
+                  <div class="card rounded-3 mb-4 mt-4">
+                    <div class="card-body p-4">
+                      <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                          <img
+                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3">
+                          <p class="lead fw-normal mb-2">Basic T-shirt</p>
+                          <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fas fa-minus"></i>
+                          </button>
+          
+                          <input id="form1" min="0" name="quantity" value="2" type="number"
+                            class="form-control form-control-sm" />
+          
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                          <h5 class="mb-0">$499.00</h5>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                          <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <div class="card rounded-3 mb-4">
+                    <div class="card-body p-4">
+                      <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                          <img
+                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3">
+                          <p class="lead fw-normal mb-2">Basic T-shirt</p>
+                          <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fas fa-minus"></i>
+                          </button>
+          
+                          <input id="form1" min="0" name="quantity" value="2" type="number"
+                            class="form-control form-control-sm" />
+          
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                          <h5 class="mb-0">$499.00</h5>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                          <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <div class="card rounded-3 mb-4">
+                    <div class="card-body p-4">
+                      <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                          <img
+                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3">
+                          <p class="lead fw-normal mb-2">Basic T-shirt</p>
+                          <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fas fa-minus"></i>
+                          </button>
+          
+                          <input id="form1" min="0" name="quantity" value="2" type="number"
+                            class="form-control form-control-sm" />
+          
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                          <h5 class="mb-0">$499.00</h5>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                          <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <div class="card rounded-3 mb-4">
+                    <div class="card-body p-4">
+                      <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                          <img
+                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3">
+                          <p class="lead fw-normal mb-2">Basic T-shirt</p>
+                          <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fas fa-minus"></i>
+                          </button>
+          
+                          <input id="form1" min="0" name="quantity" value="2" type="number"
+                            class="form-control form-control-sm" />
+          
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                          <h5 class="mb-0">$499.00</h5>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                          <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <div class="card mb-4">
+                    <div class="card-body p-4 d-flex flex-row">
+                      <div class="form-outline flex-fill">
+                        <input type="text" id="form1" class="form-control form-control-lg" />
+                        <label class="form-label" for="form1">Discound code</label>
+                      </div>
+                      <button type="button" class="btn btn-outline-warning btn-lg ms-3">Apply</button>
+                    </div>
+                  </div>
+          
+                  <div class="card">
+                    <div class="card-body">
+                      <button type="button" class="btn btn-warning btn-block btn-lg" data-toggle="modal" data-target="#exampleModal">Proceed to Pay</button>
+                    </div>
+                  </div>
+          
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+		  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<form>
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Zakaz Berish</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+				<p>
+					<label>Ism Familiya</label>
+					<input  class="form-control" placeholder='Ism Familiya'/>
+				</p>
+				<p>
+					<label>Telefon Raqam</label>
+					<input  class="form-control" placeholder='Telefon Raqam'/>
+				</p>
+				<p>
+					<label>Manzil</label>
+					<input  class="form-control" placeholder='Manzil'/>
+				</p>
+				<p>
+					<label>Mo'ljal</label>
+					<input  class="form-control" placeholder="Mo'ljal"/>
+				</p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-primary">Sotib olish</button>
+		</div>
+	</form>
+	  </div>
+	</div>
+  </div>
+
+        
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">DexignZone</a> 2020</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+		<!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="./vendor/chart.js/Chart.bundle.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+	<script src="./vendor/owl-carousel/owl.carousel.js"></script>
+	
+	<!-- Chart piety plugin files -->
+    <script src="./vendor/peity/jquery.peity.min.js"></script>
+	
+	<!-- Apex Chart -->
+	<script src="./vendor/apexchart/apexchart.js"></script>
+	
+	<!-- Dashboard 1 -->
+	<script src="./js/dashboard/dashboard-1.js"></script>
+    
+    <script src="./vendor/flot/jquery.flot.js"></script>
+    <script src="./vendor/flot/jquery.flot.pie.js"></script>
+    <script src="./vendor/flot/jquery.flot.resize.js"></script>
+    <script src="./vendor/flot-spline/jquery.flot.spline.min.js"></script>
+    <script src="./js/plugins-init/flot-init.js"></script>
+	<script>
+		function carouselReview(){
+			/*  testimonial one function by = owl.carousel.js */
+			jQuery('.testimonial-one').owlCarousel({
+				loop:true,
+				autoplay:true,
+				margin:30,
+				nav:false,
+				dots: false,
+				left:true,
+				navText: ['<i class="fa fa-chevron-left" aria-hidden="true"></i>', '<i class="fa fa-chevron-right" aria-hidden="true"></i>'],
+				responsive:{
+					0:{
+						items:1
+					},
+					484:{
+						items:2
+					},
+					882:{
+						items:3
+					},	
+					1200:{
+						items:2
+					},			
+					
+					1540:{
+						items:3
+					},
+					1740:{
+						items:4
+					}
+				}
+			})			
+		}
+		jQuery(window).on('load',function(){
+			setTimeout(function(){
+				carouselReview();
+			}, 1000); 
+		});
+	</script>
+</body>
+</html>
