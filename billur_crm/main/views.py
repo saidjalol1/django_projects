@@ -12,3 +12,7 @@ class Customers(TemplateView):
 
 class CustomersProfile(TemplateView):
     template_name = 'customers/customers_profile.html'
+
+
+class CardPage(TemplateView):
+    template_name = 'card_page.html'

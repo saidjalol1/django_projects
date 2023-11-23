@@ -8,6 +8,17 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class ProductTag(models.Model):
+    name = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique=True)
+
+
+    def __str__(self):
+        return str(self.name)
+
+
     
 
 
