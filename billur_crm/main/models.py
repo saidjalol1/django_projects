@@ -28,7 +28,9 @@ class Orders(models.Model):
     direction = models.CharField(max_length=250)
     phone_number = models.CharField(max_length=250)
     items = models.ManyToManyField(CartItems,related_name='orders', blank=True)
+    session_key = models.CharField(max_length=40, null=True, blank=True)
+    status = models.CharField(max_length=250,null=True,blank=True,default='active')
 
-
+    
     def get_overall(self):
         return sum([i.overall_price() for i in self.items.all()])

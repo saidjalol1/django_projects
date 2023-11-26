@@ -1,3 +1,4 @@
+import copy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
 from .models import Product, ProductCategory, ProductTag
@@ -5,12 +6,18 @@ from django.http import HttpResponse
 from main.models import Orders, CartItems
 from django.views import View
 from main.models import Orders
-class ProductsList(ListView):
+from .forms import ProductAddForm
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormMixin
+
+class ProductsList(FormMixin,ListView):
     model = Product
+    form_class = ProductAddForm
     template_name = 'products/ecom-product-grid.html'
     paginate_by = 8
+    success_url = reverse_lazy('/')
 
-
+    
     def get_queryset(self):
         queryset = super().get_queryset()
         if 'billur_products' in self.request.GET:
@@ -22,16 +29,32 @@ class ProductsList(ListView):
         return queryset
 
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
             'categories': ProductCategory.objects.all(),
             'tags': ProductTag.objects.all(),
+            'form': ProductAddForm()
         })
         return context
 
+   
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        return super().form_valid(form)
 
-
+    def form_invalid(self, form):
+        # Handle form submission for invalid data
+        return self.render_to_response(self.get_context_data(form=form, object_list=self.get_queryset()))
 
 
 class ProductDetail(DetailView):
@@ -72,11 +95,7 @@ def add_to_cart(request, product_id):
     return redirect('products:product_list')
 
 
-# def View_cart(View):
-#     template_name = 'card_page.html'
-    
-#     def get_context_data(self,*args,**kwargs):
-#         session_key = request.session.session_key
+
 class CardView(View):
     template_name ='card_page.html'
 
@@ -104,7 +123,7 @@ class CardView(View):
             if product.product.amount < (product.quantity + int(quantity)):
                 return HttpResponse(f"<h1>Bu mahsulot omborda {product.product.amount }ta qolgan holos !!!</h1>")
             else:
-                product.quantity += quantity
+                product.quantity = int(quantity)
                 product.save()
 
         elif 'delete' in request.POST:
@@ -116,13 +135,21 @@ class CardView(View):
         elif 'order' in request.POST:
             session_key = request.session.session_key
             cart_items = CartItems.objects.filter(session_key=session_key)
-            order_instance = Orders.objects.create(
-                customer_full_name = request.POST.get('customer_full_name'),
-                address =  request.POST.get('address'),
-                target =  request.POST.get('target'),
-                phone_number = request.POST.get('phone_number'),
-            )
-            order_instance.items.set(cart_items)
+            order_amount = sum([i.overall_price() for i in cart_items])
+    
+            if order_amount > 100000:
+                order_instance = Orders.objects.create(
+                customer_full_name=request.POST.get('customer_full_name'),
+                address=request.POST.get('address'),
+                target=request.POST.get('target'),
+                phone_number=request.POST.get('phone_number'),
+                session_key=session_key,
+                )
+        
+                order_instance.items.set(cart_items)
+        else:
+            print(sum([i.overall_price() for i in cart_items]))
+            return HttpResponse("<h1>Umumiy qiymat 100000 so'mni tashkil etganda buyurtma berish mumkin!!!</h1>")
             
 
 
@@ -130,19 +157,24 @@ class CardView(View):
         return render(request, self.template_name, self.get_context_data(request,**ctxt))
 
 
-# def view_cart(request):
-#     session_key = request.session.session_key
-   
-#     for i in cart_items:
-#         print(i)
-#     context = {
+class CustomerOrdersView(View):
+    template_name = 'customers/customer_orders.html'
 
-#         'cart_items': cart_items,
-#     }
-#     return render(request, 'card_page.html',context)
+    def get_context_data(self, *args, **kwargs):
+        return kwargs
+    
 
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        session_key = request.session.session_key
+        context['orders'] = Orders.objects.filter(session_key=session_key)
+        return render(request, self.template_name, context)
+    
 
-def clear_cart(request):
-    session_key = request.session.session_key
-    CartItems.objects.filter(session_key=session_key).delete()
-    return redirect('view_cart')
+    def post(self, request, *args, **kwargs):
+        context = {}
+        return render(request, self.template_name, self.get_context_data(**context))
+
+class CustomerOrderDetail(DetailView):
+    model = Orders
+    template_name = 'order_detail.html'

@@ -97,13 +97,15 @@
         <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" aria-expanded="false">
 							<i class="flaticon-381-networking"></i>
 							<span class="nav-text">Dashboard</span>
 						</a>
                         <ul aria-expanded="false">
+                            <li><a href="{% url 'main:statistics' %}">Statistikalar</a></li>
 							<li><a href="{% url 'products:product_list' %}">Barcha Tovarlar</a></li>
 							<li><a href="{%  url 'main:order_page' %}">Buyurtmalar</a></li>
+                            <li><a href="{%  url 'main:orders_status' %}">Buyurtmalar holati</a></li>
 						</ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -111,20 +113,12 @@
                         <span class="nav-text">Menu</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="{% url 'products:customer_order_page' %}">Mening buyurtmalarim</a></li>
                         <li><a  href="javascript:void()" aria-expanded="false">Barcha Tovarlar</a></li>
                     </ul>
                 </li>
                   
                 </ul>
-				<div class="add-menu-sidebar">
-					<img src="{% static 'images/calendar.png' %}" alt="" class="mr-3">
-					<p class="font-w500 mb-0">Create Workout Plan Now</p>
-				</div>
-				<div class="copyright">
-					<p><strong>Gymove Fitness Admin Dashboard</strong> © 2020 All Rights Reserved</p>
-					<p>Made with <span class="heart"></span> by DexignZone</p>
-				</div>
 			</div>
         </div>
         <!--**********************************

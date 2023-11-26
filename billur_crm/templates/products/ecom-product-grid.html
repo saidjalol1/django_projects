@@ -2,12 +2,19 @@
 {% load static %}
 {% block title %}Products{% endblock title %}
 {% block content %}
-                <div class="page-titles">
-						<form action="" method="GET" class="d-flex flex-wrap">
-							{% csrf_token %}
-							<button type="submit" class="btn btn-outline-success mx-2 my-2" name="billur_products">Billur mahsulotlari</button>
-							<button type="submit" class="btn btn-outline-success mx-2 my-2" name="extra-products">Qo'shimchalar mahsulotlar</button>
-						</form>
+                <div class="page-titles" >
+						<div class="d-flex justify-content-between align-items-center">
+							<div>
+								<form action="" method="GET" class="d-flex flex-wrap">
+									{% csrf_token %}
+									<button type="submit" class="btn btn-outline-success mx-2 my-2" name="billur_products">Billur mahsulotlari</button>
+									<button type="submit" class="btn btn-outline-success mx-2 my-2" name="extra-products">Qo'shimcha mahsulotlar</button>
+								</form>
+							</div>
+							<div>
+								<button type="submit" class="btn btn-outline-secondary" name="new_product_add" data-toggle="modal" data-target="#exampleModal">Mahsuot qo'shish</button>
+							</div>
+						</div>
                 </div>
                 <div class="row">
 					{% for i in object_list %}
@@ -60,5 +67,29 @@
 						{% endif %}
 					</ul>
 				</nav>
+			</div>
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				  <div class="modal-content">
+					<form action="" method="POST">
+						{% csrf_token %}
+					<div class="modal-header">
+					  <h5 class="modal-title" id="exampleModalLabel">Mahsulot Qo'shish</h5>
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+					<div class="modal-body">
+						
+					{{ form }}
+						
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
+					  <button type="button" class="btn btn-outline-secondary" name="new_product_add">Saqlash</button>
+					</div>
+				</form>
+				  </div>
+				</div>
 			</div>
 {% endblock content %}
