@@ -68,6 +68,10 @@ class OrderDetail(DetailView):
     model = Orders
     template_name = 'order_detail.html'
 
+
+class Storage(TemplateView):
+    template_name = 'ombor.html'
+
 # class Customers(TemplateView):
 #     template_name = 'customers/ecom-customers.html'
 

@@ -71,7 +71,7 @@
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 				  <div class="modal-content">
-					<form action="" method="POST">
+					<form action="" method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
 					<div class="modal-header">
 					  <h5 class="modal-title" id="exampleModalLabel">Mahsulot Qo'shish</h5>
@@ -86,7 +86,7 @@
 					</div>
 					<div class="modal-footer">
 					  <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
-					  <button type="button" class="btn btn-outline-secondary" name="new_product_add">Saqlash</button>
+					  <button type="submit" class="btn btn-outline-secondary" name="new_product_add">Saqlash</button>
 					</div>
 				</form>
 				  </div>

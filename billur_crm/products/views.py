@@ -1,16 +1,17 @@
 import copy
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from .models import Product, ProductCategory, ProductTag
 from django.http import HttpResponse
-from main.models import Orders, CartItems
+from main.models import Orders, CartItems, OrderItems
 from django.views import View
-from main.models import Orders
 from .forms import ProductAddForm
 from django.urls import reverse_lazy
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormView
 
-class ProductsList(FormMixin,ListView):
+
+
+class ProductsList(FormView,ListView):
     model = Product
     form_class = ProductAddForm
     template_name = 'products/ecom-product-grid.html'
@@ -35,26 +36,47 @@ class ProductsList(FormMixin,ListView):
         context.update({
             'categories': ProductCategory.objects.all(),
             'tags': ProductTag.objects.all(),
-            'form': ProductAddForm()
         })
         return context
-
-   
-    def post(self, request, *args, **kwargs):
-        self.object = None
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
     
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        return super().form_valid(form)
 
-    def form_invalid(self, form):
-        # Handle form submission for invalid data
-        return self.render_to_response(self.get_context_data(form=form, object_list=self.get_queryset()))
+    def post(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        form = ProductAddForm(request.POST,request.FILES)
+        if form.is_valid():
+            product = Product.objects.get(name__icontains=form.cleaned_data['name'])
+            if product != None:
+                product.name = form.cleaned_data['name']
+                product.amount = form.cleaned_data['amount']
+                product.discount = form.cleaned_data['discount']
+                product.price = form.cleaned_data['price']
+                product.image = form.cleaned_data['image']
+                product.description = form.cleaned_data['description']
+                product.category = form.cleaned_data['category']
+                product.save()
+            else:
+                form.save()
+        else:
+            print(form.errors)
+            print('form is not valid -----------------')
+            # return self.form_invalid(form)
+        return render(request, self.template_name, self.get_context_data())
+        
+
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+        
+    #     return super().form_valid(form) 
+
+    # def form_invalid(self, form):
+    #     print('form is not valid ------------------------')
+    #     return self.render_to_response(self.get_context_data(form=form, object_list=self.get_queryset()))
+    
+
+    
+    
+    
+    
 
 
 class ProductDetail(DetailView):
@@ -136,7 +158,7 @@ class CardView(View):
             session_key = request.session.session_key
             cart_items = CartItems.objects.filter(session_key=session_key)
             order_amount = sum([i.overall_price() for i in cart_items])
-    
+            # print(cart_items)
             if order_amount > 100000:
                 order_instance = Orders.objects.create(
                 customer_full_name=request.POST.get('customer_full_name'),
@@ -145,11 +167,21 @@ class CardView(View):
                 phone_number=request.POST.get('phone_number'),
                 session_key=session_key,
                 )
-        
-                order_instance.items.set(cart_items)
-        else:
-            print(sum([i.overall_price() for i in cart_items]))
-            return HttpResponse("<h1>Umumiy qiymat 100000 so'mni tashkil etganda buyurtma berish mumkin!!!</h1>")
+                print(cart_items)
+                for i in cart_items:
+                    print(i.product)
+                    order_items = OrderItems.objects.create(
+                        quantity = i.quantity,
+                        sessionkey = session_key,
+                        order = order_instance,
+                        products = i.product
+                        )
+                    # print()
+                cart_items.delete()
+                # order_instance.items.set(cart_items)
+            else:
+                print(sum([i.overall_price() for i in cart_items]))
+                return HttpResponse("<h1>Umumiy qiymat 100000 so'mni tashkil etganda buyurtma berish mumkin!!!</h1>")
             
 
 
@@ -178,3 +210,5 @@ class CustomerOrdersView(View):
 class CustomerOrderDetail(DetailView):
     model = Orders
     template_name = 'order_detail.html'
+
+

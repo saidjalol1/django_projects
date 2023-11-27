@@ -20,6 +20,10 @@ class CartItems(models.Model):
         else:
             return int(self.product.price * self.quantity)
         
+    
+
+
+
 class Orders(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     customer_full_name = models.CharField(max_length=250)
@@ -27,10 +31,21 @@ class Orders(models.Model):
     target = models.CharField(max_length=250)
     direction = models.CharField(max_length=250)
     phone_number = models.CharField(max_length=250)
-    items = models.ManyToManyField(CartItems,related_name='orders', blank=True)
     session_key = models.CharField(max_length=40, null=True, blank=True)
     status = models.CharField(max_length=250,null=True,blank=True,default='active')
+    # products = models.ManyToManyField(Product, related_name='order')
+    # discount = models.PositiveBigIntegerField(default=0)
 
-    
     def get_overall(self):
-        return sum([i.overall_price() for i in self.items.all()])
+        return 0
+
+
+class OrderItems(models.Model):
+    quantity = models.PositiveBigIntegerField(default=0)
+    products = models.ForeignKey(Product,on_delete=models.CASCADE, blank=True, null=True)
+    sessionkey = models.CharField(max_length=40, blank=True, null=True)
+    order = models.ForeignKey(Orders, on_delete=models.CASCADE, related_name = 'order_items',blank=True, null=True)
+
+
+    def __str__(self):
+        return str(self.order.customer_full_name)
