@@ -1,14 +1,14 @@
-import copy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import Product, ProductCategory, ProductTag
 from django.http import HttpResponse
-from main.models import Orders, CartItems, OrderItems
+from main.models import Orders, CartItems, OrderItems, WishList
 from django.views import View
 from .forms import ProductAddForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
-
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 
 class ProductsList(FormView,ListView):
@@ -44,8 +44,8 @@ class ProductsList(FormView,ListView):
         self.object_list = self.get_queryset()
         form = ProductAddForm(request.POST,request.FILES)
         if form.is_valid():
-            product = Product.objects.get(name__icontains=form.cleaned_data['name'])
-            if product != None:
+            try:
+                product = Product.objects.get(name=form.cleaned_data['name'])
                 product.name = form.cleaned_data['name']
                 product.amount = form.cleaned_data['amount']
                 product.discount = form.cleaned_data['discount']
@@ -54,31 +54,15 @@ class ProductsList(FormView,ListView):
                 product.description = form.cleaned_data['description']
                 product.category = form.cleaned_data['category']
                 product.save()
-            else:
+            except Product.DoesNotExist:
                 form.save()
         else:
             print(form.errors)
             print('form is not valid -----------------')
             # return self.form_invalid(form)
         return render(request, self.template_name, self.get_context_data())
-        
-
-    # def form_valid(self, form):
-    #     self.object = form.save(commit=False)
-        
-    #     return super().form_valid(form) 
-
-    # def form_invalid(self, form):
-    #     print('form is not valid ------------------------')
-    #     return self.render_to_response(self.get_context_data(form=form, object_list=self.get_queryset()))
-    
 
     
-    
-    
-    
-
-
 class ProductDetail(DetailView):
     model = Product
     template_name = 'products/ecom-product-detail.html'
@@ -115,7 +99,6 @@ def add_to_cart(request, product_id):
         cart_item.save()
 
     return redirect('products:product_list')
-
 
 
 class CardView(View):
@@ -184,8 +167,6 @@ class CardView(View):
                 return HttpResponse("<h1>Umumiy qiymat 100000 so'mni tashkil etganda buyurtma berish mumkin!!!</h1>")
             
 
-
-
         return render(request, self.template_name, self.get_context_data(request,**ctxt))
 
 
@@ -207,8 +188,27 @@ class CustomerOrdersView(View):
         context = {}
         return render(request, self.template_name, self.get_context_data(**context))
 
+
 class CustomerOrderDetail(DetailView):
     model = Orders
     template_name = 'order_detail.html'
 
+
+@require_POST
+def add_to_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist, created = WishList.objects.get_or_create(
+        session_key=request.session.session_key,
+        )
+    wishlist.products.set(wishlist.products.all())
+
+
+    if product in wishlist.products.all():
+        wishlist.products.remove(product)
+        is_added = False
+    else:
+        wishlist.products.add(product)
+        is_added = True
+
+    return JsonResponse({'is_added': is_added})
 

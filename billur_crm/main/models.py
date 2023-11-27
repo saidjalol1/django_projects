@@ -20,9 +20,6 @@ class CartItems(models.Model):
         else:
             return int(self.product.price * self.quantity)
         
-    
-
-
 
 class Orders(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
@@ -37,7 +34,7 @@ class Orders(models.Model):
     # discount = models.PositiveBigIntegerField(default=0)
 
     def get_overall(self):
-        return 0
+        return int(sum([i.get_overall() for i in self.order_items.all()]))
 
 
 class OrderItems(models.Model):
@@ -47,5 +44,20 @@ class OrderItems(models.Model):
     order = models.ForeignKey(Orders, on_delete=models.CASCADE, related_name = 'order_items',blank=True, null=True)
 
 
+    def get_overall(self):
+        return int(self.products.price * self.quantity)
+
     def __str__(self):
         return str(self.order.customer_full_name)
+
+
+class WishList(models.Model):
+    products = models.ManyToManyField(Product,blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    session_key = models.CharField(max_length=40,blank=True, null=True)
+
+
+    def __str__(self):
+        return str(self.products.name)
+    
+

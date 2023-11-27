@@ -1,6 +1,48 @@
 {% extends 'wrapper.html' %}
 {% load static %}
 {% block title %}Products{% endblock title %}
+{% block style %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<script>
+	function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+    $(document).ready(function () {
+        $('#wishlist-toggle').click(function () {
+            var productId = $(this).data('product-id');
+
+            $.ajax({
+				url: '/wishlist/toggle/' + productId + '/',
+    			type: 'POST',
+    			dataType: 'json',
+    			headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                success: function (data) {
+                    var wishlistToggle = $('#wishlist-toggle');
+                    var wishlistIcon = $('#wishlist-icon');
+
+                    if (data.is_added) {
+                        wishlistToggle.html('<i id="wishlist-icon" class="fas fa-heart" style="color: red;font-size:25px;"></i>');
+                    } else {
+                        wishlistToggle.html('<i id="wishlist-icon" class="fas fa-heart" style="color: blue;font-size:25px;"></i>');
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock style %}
 {% block content %}
                 <div class="page-titles" >
 						<div class="d-flex justify-content-between align-items-center">
@@ -27,12 +69,17 @@
                                     </div>
                                     <div class="new-arrival-content text-center mt-3">
                                         <div>
-											<h4><a href="{% url 'products:product_detail' i.id %}">{{ i.name }}</a><span class="text-danger">{% if i.category.name == 'Billur' %}
-											( Billur )
-											{% else %}
-											<a href=""></a>
-											{% endif %}</span>
-											</h4>
+											<div class="d-flex justify-content-between align-items-center pr-3">
+												<h4>
+													<a href="{% url 'products:product_detail' i.id %}">{{ i.name }}</a>
+													<span class="text-danger">{% if i.category.name == 'Billur' %}( Billur ){% else %}{% endif %}</span>
+												</h4>
+												<form action="#">
+													<p class="px-2 py-2" type="button"  style="cursor: pointer;" id="wishlist-toggle" data-product-id="{{ i.id }}" name="wishlist">
+														<i id="wishlist-icon" class="fas fa-heart text-4" {% if product_in_wishlist %} style="color: red;font-size:20px;" {% else %} style="color: blue;font-size:20px;" {% endif %}></i>
+													</p>
+												</form>
+											</div>
 											<p>soni : {{ i.amount }}ta</p>
 										</div>
                                         <span class="price">{{ i.price }}so'm</span>
@@ -93,3 +140,7 @@
 				</div>
 			</div>
 {% endblock content %}
+{% block scripts %}
+
+
+{% endblock scripts %}
