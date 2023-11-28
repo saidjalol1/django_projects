@@ -104,27 +104,25 @@
         <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" aria-expanded="false">
+                   
+                    <li>
+                        <a class="has-arrow ai-icon" aria-expanded="false">
 							<i class="flaticon-381-networking"></i>
-							<span class="nav-text">Dashboard</span>
+							<span class="nav-text">Menu</span>
 						</a>
                         <ul aria-expanded="false">
+                            {% if user.is_staff %}
                             <li><a href="{%  url 'main:storage' %}">Ombor</a></li>
                             <li><a href="{% url 'main:statistics' %}">Statistikalar</a></li>
 							<li><a href="{% url 'products:product_list' %}">Barcha Tovarlar</a></li>
 							<li><a href="{%  url 'main:order_page' %}">Buyurtmalar</a></li>
                             <li><a href="{%  url 'main:orders_status' %}">Buyurtmalar holati</a></li>
+                            {% else %}
+                            <li><a href="{% url 'products:product_list' %}">Barcha Tovarlar</a></li>
+                            <li><a href="{% url 'products:customer_order_page' %}">Mening buyurtmalarim</a></li>
+                            {% endif %}
 						</ul>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                        <i class="flaticon-381-television"></i>
-                        <span class="nav-text">Menu</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{% url 'products:customer_order_page' %}">Mening buyurtmalarim</a></li>
-                        <li><a  href="javascript:void()" aria-expanded="false">Barcha Tovarlar</a></li>
-                    </ul>
-                </li>
                 <li class="nav-item dropdown notification_dropdown d-lg-none d-md-none">
                     <a class="nav-link  ai-icon" href='{% url "products:wishlist" %}'>
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">

@@ -11,7 +11,11 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login , authenticate
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 
 class ProductsList(FormView,ListView):
     model = Product
@@ -36,34 +40,58 @@ class ProductsList(FormView,ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         wishlist = WishList.objects.get_or_create(session_key=self.request.session.session_key),
+        try:
+            user = User.objects.get(id=self.request.user.id)
+        except User.DoesNotExist:
+            user == None
+        # print(user)
         context.update({
             'categories': ProductCategory.objects.all(),
             'tags': ProductTag.objects.all(),
             'wishlist_products':wishlist,
+            'login_form': AuthenticationForm(),
+            'product_form': ProductAddForm(),
+            'user': user,
         })  
         return context
     
 
     def post(self, request, *args, **kwargs):
         self.object_list = self.get_queryset()
-        form = ProductAddForm(request.POST,request.FILES)
-        if form.is_valid():
-            try:
-                product = Product.objects.get(name=form.cleaned_data['name'])
-                product.name = form.cleaned_data['name']
-                product.amount = form.cleaned_data['amount']
-                product.discount = form.cleaned_data['discount']
-                product.price = form.cleaned_data['price']
-                product.image = form.cleaned_data['image']
-                product.description = form.cleaned_data['description']
-                product.category = form.cleaned_data['category']
-                product.save()
-            except Product.DoesNotExist:
-                form.save()
-        else:
-            print(form.errors)
-            print('form is not valid -----------------')
+        if 'new_product_add' in request.POST:
+            form = ProductAddForm(request.POST,request.FILES)
+            if form.is_valid():
+                try:
+                    product = Product.objects.get(name=form.cleaned_data['name'])
+                    product.name = form.cleaned_data['name']
+                    product.amount = form.cleaned_data['amount']
+                    product.discount = form.cleaned_data['discount']
+                    product.price = form.cleaned_data['price']
+                    product.image = form.cleaned_data['image']
+                    product.description = form.cleaned_data['description']
+                    product.category = form.cleaned_data['category']
+                    product.save()
+                except Product.DoesNotExist:
+                    form.save()
+            else:
+                print(form.errors)
+                print('form is not valid -----------------')
             # return self.form_invalid(form)
+        if 'login' in request.POST:
+            login_form = AuthenticationForm(data=request.POST)
+            if login_form.is_valid():
+                user = authenticate(
+                    username=login_form.cleaned_data['username'],
+                    password=login_form.cleaned_data['password'],
+                )
+                if user is not None:
+                    login(request, user)
+                    print('logged in')
+                    return redirect('products:product_list')
+                else:
+                    print('wrong')
+                    return redirect('products:product_list')
+                
         return render(request, self.template_name, self.get_context_data())
 
     

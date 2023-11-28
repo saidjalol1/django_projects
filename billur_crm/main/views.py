@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views import View
 from .models import Orders
+from products.models import Storage
 
 
 
@@ -71,7 +72,22 @@ class OrderDetail(DetailView):
     template_name = 'order_detail.html'
 
 
-class Storage(TemplateView):
+class StorageView(View):
     template_name = 'ombor.html'
+
+
+    def get_context_data(self,**kwargs):
+        kwargs['products'] = Storage.objects.get(id=1)
+        print(kwargs['products'].overall_products_number())
+        return kwargs
+    
+
+    def get(self, request, *args, **kwargs):
+        return render(request,self.template_name,self.get_context_data())
+
+
+    def post(self, request,*args,**kwargs):
+        ctxt = {}
+        return render(request, self.template_name, self.get_context_data(**ctxt))
 
 
