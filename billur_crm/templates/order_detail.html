@@ -7,6 +7,13 @@
 {% endblock style %}
 {% block title %}Card{% endblock title%}
 {% block content %}
+              <div class="d-flex justify-content-end">
+                <form action="" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" name="print" class="btn btn-outline-success">chop etish</button>
+                  <button type="submit" name="driver"  class="btn btn-outline-success" >Yetkazib beruvchi</button>
+                </form>
+              </div>
               <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-10">
                   {% for i in object.order_items.all %}
