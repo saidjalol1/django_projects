@@ -12,7 +12,7 @@ class CartItems(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE, blank=True, null=True)
     quantity = models.PositiveIntegerField(default=0)
     session_key = models.CharField(max_length=40, null=True, blank=True)
-
+    
 
     def overall_price(self):
         if self.product.discount != 0:
@@ -58,6 +58,6 @@ class WishList(models.Model):
 
 
     def __str__(self):
-        return str(self.products.name)
+        return str(self.date_added)
     
 

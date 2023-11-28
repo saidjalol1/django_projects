@@ -10,5 +10,6 @@ urlpatterns = [
     path('orders/<pk>', views.CustomerOrderDetail.as_view(), name='cutomer_order_detail'),
     path('cart_page/', views.CardView.as_view(), name='cart'),
     path('wishlist/toggle/<int:product_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('wishlist/', views.WishListView.as_view(),name='wishlist')
     
 ]

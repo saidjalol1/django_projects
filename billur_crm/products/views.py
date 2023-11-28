@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import Product, ProductCategory, ProductTag
@@ -33,10 +35,12 @@ class ProductsList(FormView,ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        wishlist = WishList.objects.get_or_create(session_key=self.request.session.session_key),
         context.update({
             'categories': ProductCategory.objects.all(),
             'tags': ProductTag.objects.all(),
-        })
+            'wishlist_products':wishlist,
+        })  
         return context
     
 
@@ -71,7 +75,8 @@ class ProductDetail(DetailView):
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     session_key = request.session.session_key
-    quantity = request.POST.get('quantity')
+    if 'quantity' in request.POST:
+        quantity = request.POST.get('quantity')
     
 
     if not session_key:
@@ -81,23 +86,33 @@ def add_to_cart(request, product_id):
     
     try:
         cart_item = CartItems.objects.get(session_key=session_key, product_id=product.id)
-        if product.amount == 0 or product.amount < int(quantity):
-            return HttpResponse('<h1>Omborda Mahsulot yetrali emas</h1>')
+        quantity = request.POST.get('quantity')
+        if quantity != None:
+            if product.amount == 0 or product.amount < int(quantity):
+                return HttpResponse('<h1>Omborda Mahsulot yetrali emas</h1>')
 
-        cart_item.quantity += int(quantity)
-        cart_item.save()
+            cart_item.quantity += int(quantity)
+            cart_item.save()
 
 
     except CartItems.DoesNotExist:
-        quantity = int(quantity)
-        CartItems.objects.create(
-            product_id=product_id,
-            session_key=session_key,
-        )
-        cart_item = CartItems.objects.get(session_key=session_key, product_id = product_id)
-        cart_item.quantity += quantity
-        cart_item.save()
-
+        quantity = request.POST.get('quantity')
+        if quantity:
+            quantity = int(quantity)
+            CartItems.objects.create(
+                product_id=product_id,
+                session_key=session_key,
+            )
+            cart_item = CartItems.objects.get(session_key=session_key, product_id = product_id)
+            cart_item.quantity += quantity
+            cart_item.save()
+        else:
+            cart_item = CartItems.objects.create(
+                product_id=product_id,
+                session_key=session_key,
+            )
+            cart_item.quantity += 1
+            cart_item.save()
     return redirect('products:product_list')
 
 
@@ -121,7 +136,7 @@ class CardView(View):
         ctxt = {}
 
         if 'add_quantity' in request.POST:
-            product = CartItems.objects.get(product_id=request.POST.get('product'))
+            product = CartItems.objects.get(session_key=request.session.session_key,product_id=request.POST.get('product'))
             quantity = request.POST.get('quantity')
             calculate = product.quantity + int(quantity)
             print(calculate)
@@ -132,7 +147,7 @@ class CardView(View):
                 product.save()
 
         elif 'delete' in request.POST:
-            product = CartItems.objects.get(product_id=request.POST.get('product_delete'))
+            product = CartItems.objects.get(session_key=request.session.session_key,product_id=request.POST.get('product_delete'))
             base_product = Product.objects.get(id=product.product.id)
             base_product.amount += product.quantity
             base_product.save()
@@ -173,6 +188,9 @@ class CardView(View):
 class CustomerOrdersView(View):
     template_name = 'customers/customer_orders.html'
 
+
+   
+
     def get_context_data(self, *args, **kwargs):
         return kwargs
     
@@ -194,10 +212,40 @@ class CustomerOrderDetail(DetailView):
     template_name = 'order_detail.html'
 
 
+class WishListView(View):
+    template_name = 'wishlist.html'
+
+
+    def get_context_data(self, **kwargs):
+        wishlist = WishList.objects.get(session_key=self.request.session.session_key)
+        kwargs['wishlist'] = wishlist
+        return kwargs
+
+
+    def get(self,reqeust, *args, **kwargs):
+        return render(reqeust, self.template_name, self.get_context_data())
+    
+
+    def post(self,request, *args, **kwargs):
+        ctxt = {}
+        if 'add_to_card' in request.POST:
+            request = request
+            product_id = request.POST.get('product')
+            print(product_id)
+            add_to_cart(request,product_id)
+        elif 'delete' in request.POST:
+            wishlist = WishList.objects.get(session_key=request.session.session_key)
+            product_id = request.POST.get('product_delete')
+            print(product_id)
+            product = get_object_or_404(Product, id=product_id)
+            wishlist.products.remove(product)
+        return render(request, self.template_name, self.get_context_data(**ctxt))
+
+
 @require_POST
 def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    wishlist, created = WishList.objects.get_or_create(
+    wishlist =  WishList.objects.get(
         session_key=request.session.session_key,
         )
     wishlist.products.set(wishlist.products.all())
