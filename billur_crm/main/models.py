@@ -33,6 +33,11 @@ class Orders(models.Model):
     # products = models.ManyToManyField(Product, related_name='order')
     # discount = models.PositiveBigIntegerField(default=0)
 
+
+    class Meta:
+        ordering = ['-date_added']
+
+
     def get_overall(self):
         return int(sum([i.get_overall() for i in self.order_items.all()]))
 

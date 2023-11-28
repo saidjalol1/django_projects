@@ -69,7 +69,11 @@
                                                                     <button class="dropdown-item" name="is_being" type="submit" value="Tayyorlanmoqda">Tayyorlanmoqda</button>
                                                                     <button class="dropdown-item" name="received" type="submit" value="Qabul qilindi">Qabul qilish</button>
                                                                     <button class="dropdown-item" name="cancel" type="submit" value="Rad etildi">Rad etish</button>
-                                                                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger">Delete</a>
+                                                                    <form action="" method="POST">
+                                                                        {% csrf_token %}
+                                                                        <input type="text" name="order" value="{{ i.id }}" style="display: none;">
+                                                                        <button class="dropdown-item text-danger" type="submit" name="delete">Delete</button>
+                                                                    </form>
                                                                 </div>
                                                             </form>
                                                         </div>

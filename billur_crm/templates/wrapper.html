@@ -117,6 +117,7 @@
 							<li><a href="{% url 'products:product_list' %}">Barcha Tovarlar</a></li>
 							<li><a href="{%  url 'main:order_page' %}">Buyurtmalar</a></li>
                             <li><a href="{%  url 'main:orders_status' %}">Buyurtmalar holati</a></li>
+                            <li><a href="{% url 'products:logout' %}">Logout</a></li>
                             {% else %}
                             <li><a href="{% url 'products:product_list' %}">Barcha Tovarlar</a></li>
                             <li><a href="{% url 'products:customer_order_page' %}">Mening buyurtmalarim</a></li>

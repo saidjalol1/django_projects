@@ -57,6 +57,7 @@
 </style>
 {% endblock style %}
 {% block content %}
+{% load crispy_forms_tags %}
                 <div class="page-titles" >
 						<div class="d-flex justify-content-between align-items-center flex-wrap">
 							<div>
@@ -169,7 +170,7 @@
 					</div>
 					<div class="modal-body">
 						
-					{{ login_form }}
+					{{ login_form|crispy }}
 					{% csrf_token %}
 					</div>
 					<div class="modal-footer">

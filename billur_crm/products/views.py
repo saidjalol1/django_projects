@@ -43,7 +43,7 @@ class ProductsList(FormView,ListView):
         try:
             user = User.objects.get(id=self.request.user.id)
         except User.DoesNotExist:
-            user == None
+            user = None
         # print(user)
         context.update({
             'categories': ProductCategory.objects.all(),
@@ -166,19 +166,11 @@ class CardView(View):
         if 'add_quantity' in request.POST:
             product = CartItems.objects.get(session_key=request.session.session_key,product_id=request.POST.get('product'))
             quantity = request.POST.get('quantity')
-            calculate = product.quantity + int(quantity)
-            print(calculate)
-            if product.product.amount < (product.quantity + int(quantity)):
-                return HttpResponse(f"<h1>Bu mahsulot omborda {product.product.amount }ta qolgan holos !!!</h1>")
-            else:
-                product.quantity = int(quantity)
-                product.save()
+            product.quantity = int(quantity)
+            product.save()
 
         elif 'delete' in request.POST:
             product = CartItems.objects.get(session_key=request.session.session_key,product_id=request.POST.get('product_delete'))
-            base_product = Product.objects.get(id=product.product.id)
-            base_product.amount += product.quantity
-            base_product.save()
             product.delete()
         elif 'order' in request.POST:
             session_key = request.session.session_key
@@ -216,8 +208,6 @@ class CardView(View):
 class CustomerOrdersView(View):
     template_name = 'customers/customer_orders.html'
 
-
-   
 
     def get_context_data(self, *args, **kwargs):
         return kwargs

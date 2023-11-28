@@ -1,8 +1,9 @@
+from django.http import Http404
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views import View
-from .models import Orders
+from .models import Orders, OrderItems
 from products.models import Storage
 
 
@@ -47,6 +48,9 @@ class OrdersView(View):
             order = Orders.objects.get(id=request.POST.get('order'))
             order.status = request.POST.get('cancel')
             order.save()
+        if 'delete' in request.POST:
+            order_instance = Orders.objects.get(pk=request.POST.get('order'))
+            order_instance.delete()
         return render(request, self.template_name, self.get_context_data(**context))
 
 
@@ -67,9 +71,34 @@ class OrdersStatusView(View):
         return render(request,self.template_name, self.get_context_data(**context))
     
 
-class OrderDetail(DetailView):
-    model = Orders
+class OrderDetail(View):
     template_name = 'order_detail.html'
+
+    def get_object(self):
+        try:
+            object = Orders.objects.get(pk=self.kwargs['pk'])
+        except Orders.DoesNotExist:
+            raise Http404('Order not found!')
+        return object
+
+
+    def get_context_data(self, **kwargs):
+        kwargs['object'] = self.get_object()
+        return kwargs
+    
+    def get(self,request,*args,**kwargs):
+        return render(request, self.template_name,self.get_context_data())
+
+
+    def post(self,request,*args,**kwargs):
+        ctxt = {}
+        if 'delete' in request.POST:
+            print(request.POST.get('product_delete'))
+            product_id = request.POST.get('product_delete')
+            order_instance = Orders.objects.get(pk=self.get_object().id)
+            item = order_instance.order_items.get(id=product_id)
+            item.delete()
+        return render(request, self.template_name, self.get_context_data(**ctxt))
 
 
 class StorageView(View):
