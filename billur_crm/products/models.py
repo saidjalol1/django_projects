@@ -38,6 +38,7 @@ class ProductTag(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=250)
     price = models.IntegerField(default=0)
+    old_price = models.IntegerField(default=0)
     amount = models.IntegerField(default=0)
     discount = models.PositiveIntegerField(default=0)
     image = ResizedImageField(size=[570,650],upload_to='movie_posters/')

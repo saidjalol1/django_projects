@@ -232,11 +232,24 @@ class CustomerOrderDetail(DetailView):
 
 class WishListView(View):
     template_name = 'wishlist.html'
-
+    
 
     def get_context_data(self, **kwargs):
-        wishlist = WishList.objects.get(session_key=self.request.session.session_key)
+        session_key = self.request.session.session_key
+
+        if not session_key:
+            self.request.session.save()
+            session_key = self.request.session.session_key
+
+        wishlist = WishList.objects.get(session_key=session_key)
+        products = wishlist.products.all()
+        status = False
+        if products:
+            status = True
+        else:
+            pass
         kwargs['wishlist'] = wishlist
+        kwargs['wishlist_status'] = status
         return kwargs
 
 

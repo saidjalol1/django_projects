@@ -1,10 +1,11 @@
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views import View
 from .models import Orders, OrderItems
 from products.models import Storage
+from products.models import Product
 
 
 
@@ -35,6 +36,18 @@ class OrdersView(View):
         if 'send' in request.POST:
             order = Orders.objects.get(id=request.POST.get('order'))
             order.status = request.POST.get('send')
+            order_items = order.order_items.all()
+            # print(order_items)
+            for i in order_items:
+                products = Product.objects.get(id=i.products.id)
+                if products.amount < i.quantity:
+                    return HttpResponse(f"<h1>Mahsulot {products.name} omborda yetarli emas</h1>")
+                else:
+                    products.amount -= i.quantity
+                    products.save()
+                    print(products.amount)
+                    print(i.products)
+                    print(i)
             order.save()
         if 'is_being' in request.POST:
             order = Orders.objects.get(id=request.POST.get('order'))
