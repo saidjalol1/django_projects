@@ -84,6 +84,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="new-arrival-product">
+									<a href="{% url 'products:product_detail' i.id %}">
                                     <div class="new-arrivals-img-contnent" style="width: 100%;height: 300px;">
                                         <img class="img-fluid" src="{{ i.image.url }}" alt="" style="width: 100%;height:100%;">
                                     </div>
@@ -91,7 +92,7 @@
                                         <div>
 											<div class="d-flex justify-content-between align-items-center pr-3">
 												<h4>
-													<a href="{% url 'products:product_detail' i.id %}">{{ i.name }}</a>
+													<a>{{ i.name }}</a>
 													<span class="text-danger">{% if i.category.name == 'Billur' %}( Billur ){% else %}{% endif %}</span>
 												</h4>
 												<p class="px-2 py-2 wishlist-toggle"   style="cursor: pointer;" data-product-id="{{ i.id }}" name="wishlist">
@@ -107,10 +108,11 @@
 											style="font-weight: 600;
 												color: #0B2A97;
 												font-size: 24px;
-												margin-bottom:">
+												">
 												{{ i.price }}so'm
 										</div>
                                     </div>
+									</a>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +172,7 @@
 				<div class="modal-dialog" role="document">
 				  <div class="modal-content">
 					<form action="" method="POST" enctype="multipart/form-data">
-						
+						{% csrf_token %}
 					<div class="modal-header">
 					  <h5 class="modal-title" id="exampleModalLabel">Mahsulot Qo'shish</h5>
 					  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -180,7 +182,7 @@
 					<div class="modal-body">
 						
 					{{ login_form|crispy }}
-					{% csrf_token %}
+				
 					</div>
 					<div class="modal-footer">
 					  <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>

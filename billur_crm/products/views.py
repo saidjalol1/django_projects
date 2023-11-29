@@ -237,10 +237,6 @@ class WishListView(View):
     def get_context_data(self, **kwargs):
         session_key = self.request.session.session_key
 
-        if not session_key:
-            self.request.session.save()
-            session_key = self.request.session.session_key
-
         wishlist = WishList.objects.get(session_key=session_key)
         products = wishlist.products.all()
         status = False
@@ -276,8 +272,14 @@ class WishListView(View):
 @require_POST
 def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
+    session_key = request.session.session_key
+
+    if not session_key:
+        request.session.save()
+        session_key = request.session.session_key
+
     wishlist =  WishList.objects.get(
-        session_key=request.session.session_key,
+        session_key=session_key,
         )
     wishlist.products.set(wishlist.products.all())
 

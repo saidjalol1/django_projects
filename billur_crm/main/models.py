@@ -30,9 +30,6 @@ class Orders(models.Model):
     phone_number = models.CharField(max_length=250)
     session_key = models.CharField(max_length=40, null=True, blank=True)
     status = models.CharField(max_length=250,null=True,blank=True,default='active')
-    # products = models.ManyToManyField(Product, related_name='order')
-    # discount = models.PositiveBigIntegerField(default=0)
-
 
     class Meta:
         ordering = ['-date_added']
@@ -64,6 +61,28 @@ class WishList(models.Model):
 
     def __str__(self):
         return str(self.date_added)
+    
+
+class Expenses(models):
+    name = models.CharField(max_length=250)
+    amount = models.BigIntegerField(default=0)
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return str(self.name) + " " + str(self.amount)
+    
+
+class UserTrack(models.Model):
+    order = models.ForeignKey(Orders,on_delete=models.CASCADE)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.seller.first_name
 
 
 
