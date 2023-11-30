@@ -4,7 +4,17 @@ from django.contrib.auth.models import User
 
 
     
+class Deliver(models.Model):
+    name = models.CharField(max_length=200)
+    surname = models.CharField(max_length=250)
+    car_type = models.CharField(max_length=250)
+    car_color = models.CharField(max_length=250)
+    car_number = models.CharField(max_length=250)
+    phone_number = models.CharField(max_length=250)
 
+
+    def __str__(self):
+        return    'Haydovchi' + " " + str(self.name + " " + self.surname)
 
     
 
@@ -30,7 +40,8 @@ class Orders(models.Model):
     phone_number = models.CharField(max_length=250)
     session_key = models.CharField(max_length=40, null=True, blank=True)
     status = models.CharField(max_length=250,null=True,blank=True,default='active')
-
+    received_admin = models.ForeignKey(User,on_delete=models.CASCADE,related_name='sold_products',blank=True,null=True)
+    deliver = models.ForeignKey(Deliver, on_delete=models.CASCADE, related_name='deliver_products', blank=True, null=True)
     class Meta:
         ordering = ['-date_added']
 
@@ -63,7 +74,7 @@ class WishList(models.Model):
         return str(self.date_added)
     
 
-class Expenses(models):
+class Expenses(models.Model):
     name = models.CharField(max_length=250)
     amount = models.BigIntegerField(default=0)
     start_date = models.DateField(blank=True, null=True)

@@ -3,15 +3,15 @@ from django.shortcuts import render,get_object_or_404
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views import View
-from .models import Orders, OrderItems
+from .models import Orders, OrderItems, Deliver
 from products.models import Storage
 from products.models import Product
+from .forms import DriverForm
 
 
 
 
-class StatisticsView(TemplateView):
-    template_name = 'index.html'
+
 
 
 class OrdersView(View):
@@ -20,6 +20,8 @@ class OrdersView(View):
 
     def get_context_data(self, *args, **kwargs):
         kwargs['orders'] = Orders.objects.all()
+        kwargs['driver_add_form'] = DriverForm()
+        kwargs['delivers'] = Deliver.objects.all()
         return kwargs
     
 
@@ -37,6 +39,8 @@ class OrdersView(View):
             order = Orders.objects.get(id=request.POST.get('order'))
             order.status = request.POST.get('send')
             order_items = order.order_items.all()
+            order.received_admin = request.user
+            order.deliver_id = request.POST.get('driver_select')
             # print(order_items)
             for i in order_items:
                 products = Product.objects.get(id=i.products.id)
@@ -64,6 +68,12 @@ class OrdersView(View):
         if 'delete' in request.POST:
             order_instance = Orders.objects.get(pk=request.POST.get('order'))
             order_instance.delete()
+        if 'driver' in request.POST:
+            form = DriverForm(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                return render(request,self.template_name, self.get_context_data(**context))
         return render(request, self.template_name, self.get_context_data(**context))
 
 

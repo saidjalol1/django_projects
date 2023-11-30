@@ -113,7 +113,7 @@
                         <ul aria-expanded="false">
                             {% if user.is_staff %}
                             <li><a href="{%  url 'main:storage' %}">Ombor</a></li>
-                            <li><a href="{% url 'main:statistics' %}">Statistikalar</a></li>
+                            <li><a href="{% url 'statistic:statistics' %}">Statistikalar</a></li>
 							<li><a href="{% url 'products:product_list' %}">Barcha Tovarlar</a></li>
 							<li><a href="{%  url 'main:order_page' %}">Buyurtmalar</a></li>
                             <li><a href="{%  url 'main:orders_status' %}">Buyurtmalar holati</a></li>
