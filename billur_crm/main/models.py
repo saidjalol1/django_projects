@@ -96,5 +96,16 @@ class UserTrack(models.Model):
         return self.seller.first_name
 
 
+class Staffs(models.Model):
+    name = models.CharField(max_length=250)
+    phone_number = models.CharField(max_length=250)
+    address = models.CharField(max_length=250,blank=True, null=True)
+    salary = models.BigIntegerField(default=0)
+    position = models.CharField(max_length=250)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.name
 
 

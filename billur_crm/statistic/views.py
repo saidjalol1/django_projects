@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Sum, F
 from django.db.models.functions import TruncMonth
 from django.views import View
@@ -10,6 +10,8 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.db.models import Count
 from .forms import ExpensesForm
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
 class StatisticsView(View):
@@ -64,6 +66,8 @@ class StatisticsView(View):
         kwargs['expenses'] = expenses_json
         kwargs['workers'] = per_worker_lists_json
         kwargs['expensesForm'] = ExpensesForm()
+        kwargs['sellerForm'] = UserCreationForm()
+        kwargs['users'] = User.objects.filter()
         return kwargs
 
 
@@ -80,4 +84,14 @@ class StatisticsView(View):
             else:
                 print(form.errors)
                 return render('/')
+        if 'add_seller' in request.POST:
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                seller =  form.save(commit=False)
+                print(seller)
+                seller.is_staff = True
+                print(dir(seller))
+                seller.save()
+            else:
+                return redirect('/')
         return render(request,self.template_name,self.get_context_data(**ctxt))

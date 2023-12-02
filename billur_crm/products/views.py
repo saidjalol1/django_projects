@@ -236,7 +236,7 @@ class WishListView(View):
 
     def get_context_data(self, **kwargs):
         session_key = self.request.session.session_key
-
+        print(self.request.session.session_key)
         wishlist = WishList.objects.get(session_key=session_key)
         products = wishlist.products.all()
         status = False
